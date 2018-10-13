@@ -1,0 +1,63 @@
+.deleteIcon ,.editIcon
+{
+    cursor: pointer;
+}
+
+.list
+{
+    border: 0.2px solid;
+    margin: 7px;
+    padding: 5px;
+    background: linear-gradient(to right,#5260e6,#26c6ce,#24dbdd,#37b9e9,#35bce7,#5260e6);
+}
+
+.title   
+{
+    font-weight: bold;
+}
+.collection-item
+{
+    border: 0px solid;
+}
+body
+{
+    margin: 45px;   
+}
+
+.swal-button--confirm{
+    padding: 7px 19px;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    font-size: 12px;
+    position: relative;
+    align-content: center;
+    border: 1px solid green;
+  }
+
+  .swal-button--cancel{
+    padding: 7px 19px;
+    border-radius: 4px;
+    background-color:white;
+    font-size: 12px;
+    position: relative;
+    align-content: center;
+    color: black;
+    border: 1px solid red;
+    margin-left:20px;
+  }
+
+  .swal-button--cancel:hover{
+   background-color: red;
+   color: white;
+  }
+
+  .swal-button--confirm:hover{
+    background-color: green;
+    color: white;
+  }
+
+  .swal-content__input:focus
+  {
+    border-color: black;
+  }

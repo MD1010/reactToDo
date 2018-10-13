@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Tasks from './Tasks';
+import swal from 'sweetalert';
+// import $ from 'jquery';
 
 class App extends Component {
 
@@ -21,15 +23,38 @@ class App extends Component {
       })
   }
 
+  
   addItem = () =>
   {
     let newItem = document.getElementById('textarea').value;
     const todos = this.state.todos;
-    todos.push({id:todos.length+1,content:newItem});
-    this.setState({todos});
-    document.getElementById('textarea').value = '';
+    if(newItem) 
+    {
+      console.log("value",newItem)
+      todos.push({id:todos.length+1,content:newItem});
+      this.setState({todos});
+      document.getElementById('textarea').value = '';
+    }
   } 
 
+  editItem = (id) =>
+  {
+    swal(
+      {
+          title: "edit your task here:",
+          content: "input",
+          closeOnClickOutside: false,
+          closeOnEsc: false,
+          buttons: true,
+      })
+      .then((result) => 
+      {
+          const todos = this.state.todos;
+          todos[id-1].content = result;
+          this.setState({todos});
+          
+      });
+  }
   handleKeyPress = (event) => {
     if(event.key === 'Enter'){
       this.addItem(); 
@@ -38,16 +63,18 @@ class App extends Component {
   render() {
     return (
       <div className="App container">
-        <h1 className="center cyan-text">To Do List</h1>
-        <textarea id="textarea" className="materialize-textarea" onKeyPress={this.handleKeyPress}></textarea>
+        <h1 className="center title">To Do List</h1>
+        <input id="textarea" onKeyPress={this.handleKeyPress}/>
         <br></br><br></br>
         <div className="center-align">
-          <button className="btn waves-effect waves-light" type="submit" onClick={this.addItem}>
-            <i className="material-icons">Add a mission</i>
+          <br></br>
+          <button className="btn waves-effect blue" type="submit" onClick={this.addItem}>
+              <b>Add a mission</b>
           </button>
         </div>
-        <br></br><br></br><br></br><br></br>
-        <Tasks todos= {this.state.todos} deleteItem={this.deleteItem} addItem={this.addItem}/>
+        <br></br><br></br>
+        <Tasks todos= {this.state.todos} deleteItem={this.deleteItem} addItem={this.addItem}
+        editItem={this.editItem}/>
       </div>
     );
   }
