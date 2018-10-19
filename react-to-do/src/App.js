@@ -8,8 +8,7 @@ class App extends Component {
   state =
   {
     todos:[
-      {id:1 , content:"but milk"},
-      {id:2 ,content:"make the react app to work"}
+     {"id":1, content:"first task"}
     ]
   }
   deleteItem = (id) => 
