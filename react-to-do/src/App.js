@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Tasks from './components/Tasks';
-import swal from 'sweetalert';
+
+// import swal from 'sweetalert';
 // import $ from 'jquery';
 
 class App extends Component {
@@ -10,55 +11,80 @@ class App extends Component {
 
     this.state = {
       todos:[
-        {"id":1, content:"first task"}
+       
        ],
        textarea: ''
     }
   }
-
+componentDidMount()
+{
+  fetch('http://localhost:4000/missions')
+  .then(res => res.json())
+  .then(json => 
+  {
+    this.setState({
+     todos : json
+    })
+  })
+}
   deleteItem = (id) => 
   {
-      const todos = this.state.todos.filter(todo =>{
-       return todo.id !== id;
-      });
-      
-      this.setState({
-        todos
+      let headers = new Headers();
+      headers.append('Content-Type','json/application');
+      let myInit = {
+        method: 'DELETE',
+        headers: headers, 
+        mode: 'cors',
+        cache: 'default'
+      };
+      let myRequest = new Request('http://localhost:4000/missions/id', myInit);
+      fetch(myRequest)
+      .then(()=>  
+      {
+        console.log(this.state.todos);
+        const todos = this.state.todos.filter(todo =>{
+          return todo._id !== id;
+         });
+         
+         this.setState({
+           todos
+         })
+     
       })
   }
 
   
   addItem = (value) =>
   {
-    let newItem = value;
-    const {todos} = this.state;
+    // let newItem = value;
+    // const {todos} = this.state;
 
-    if(newItem) 
-    {
-      todos.push({id: todos.length+1,content: newItem});
-      this.setState({todos});
-      this.setState({textarea: ''});
-    }
+    // if(newItem) 
+    // {
+    //   todos.push({id: todos.length+1, content: newItem});
+    //   this.setState({todos});
+    //   this.setState({textarea: ''});
+    // }
   } 
 
   editItem = (id) =>
   {
-    swal(
-      {
-          title: "edit your task here:",
-          content: "input",
-          closeOnClickOutside: false,
-          closeOnEsc: false,
-          buttons: true,
-      })
-      .then((result) => 
-      {   
-          if(result) {
-            const todos = this.state.todos;
-            todos[id-1].content = result;
-            this.setState({todos});
-          } 
-      });
+    // swal(
+    //   {
+    //       title: "edit your task here:",
+    //       content: "input",
+    //       closeOnClickOutside: false,
+    //       closeOnEsc: false,
+    //       buttons: true,
+    //   })
+    //   .then((result) => 
+    //   {   
+    //       if(result) {
+    //         const todos = this.state.todos;
+    //         todos[id-1].content = result;
+    //         this.setState({todos});
+    //       } 
+    //   });
   }
   handelTyping = (event) => 
   {

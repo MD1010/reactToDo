@@ -7,7 +7,7 @@ const Tasks = ({todos,deleteItem,editItem}) =>
     const toDoList = todos.length ? (
         todos.map(todo =>{
             return(
-                <Task key={todo.id} todo= {todo} 
+                <Task key={todo._id} todo={todo} 
                 deleteItem={deleteItem} 
                 editItem={editItem}/>      
             )
