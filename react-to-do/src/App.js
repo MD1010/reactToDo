@@ -37,11 +37,11 @@ componentDidMount()
         mode: 'cors',
         cache: 'default'
       };
-      let myRequest = new Request('http://localhost:4000/missions/id', myInit);
+      let myRequest = new Request('http://localhost:4000/missions/'+id, myInit);
       fetch(myRequest)
       .then(()=>  
       {
-        console.log(this.state.todos);
+        
         const todos = this.state.todos.filter(todo =>{
           return todo._id !== id;
          });
@@ -49,7 +49,7 @@ componentDidMount()
          this.setState({
            todos
          })
-     
+         console.log(this.state.todos);
       })
   }
 
