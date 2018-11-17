@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Tasks from './components/Tasks';
 
-// import swal from 'sweetalert';
-// import $ from 'jquery';
+import swal from 'sweetalert';
+
 
 class App extends Component {
 
@@ -64,36 +64,62 @@ componentDidMount()
       fetch(myRequest)
       .then((newRocordAdded)=>  
       {
-          newRocordAdded.json().then((data)=>{
-          if(data)
+          newRocordAdded.json().then((responseFromServer)=>{
+          if(responseFromServer)
           {
-            this.state.todos.push({_id: data._id, content: data.content})
+            this.state.todos.push({_id: responseFromServer._id, content: responseFromServer.content})
             console.log(this.state.todos);
             this.setState({textarea:''})
           }
-
           });
       })
   } 
 
   editItem = (id) =>
   {
-    // swal(
-    //   {
-    //       title: "edit your task here:",
-    //       content: "input",
-    //       closeOnClickOutside: false,
-    //       closeOnEsc: false,
-    //       buttons: true,
-    //   })
-    //   .then((result) => 
-    //   {   
-    //       if(result) {
-    //         const todos = this.state.todos;
-    //         todos[id-1].content = result;
-    //         this.setState({todos});
-    //       } 
-    //   });
+    swal(
+      {
+          title: "edit your task here:",
+          content: "input",
+          closeOnClickOutside: false,
+          closeOnEsc: false,
+          buttons: true,
+      })
+      .then((result) => 
+      { 
+        const todos = this.state.todos; 
+        let newItem = {content:result}; 
+        let foundIDIndex = todos.indexOf(todos.find(element => 
+        {
+          return element._id === id;
+        }));
+
+        let headers = new Headers();
+          headers.append('Content-Type','application/json');
+          let myInit = {
+            method: 'PUT',
+            headers: headers, 
+            mode: 'cors',
+            cache: 'default',
+            body: JSON.stringify(newItem)
+          };
+          let myRequest = new Request('http://localhost:4000/missions/' + id, myInit);
+          fetch(myRequest)
+          .then((newRocordAdded)=>  
+          {
+              newRocordAdded.json().then((responseFromServer)=>
+              {
+                if(responseFromServer)
+                {
+                  todos[foundIDIndex].content = result;
+                  this.setState({todos});
+                  console.log(this.state.todos);
+                  this.setState({textarea:''})
+                }
+    
+              });
+          })
+      });
   }
   handelTyping = (event) => 
   {
