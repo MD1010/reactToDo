@@ -10,10 +10,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      todos:[
-       
-       ],
-       textarea: ''
+      todos:[],
+      textarea: ''
     }
   }
 componentDidMount()
@@ -30,41 +28,52 @@ componentDidMount()
   deleteItem = (id) => 
   {
       let headers = new Headers();
-      headers.append('Content-Type','json/application');
+      headers.append('Content-Type','application/json');
       let myInit = {
         method: 'DELETE',
         headers: headers, 
         mode: 'cors',
         cache: 'default'
       };
-      let myRequest = new Request('http://localhost:4000/missions/'+id, myInit);
+      let myRequest = new Request('http://localhost:4000/missions/' + id, myInit);
       fetch(myRequest)
       .then(()=>  
       {
-        
-        const todos = this.state.todos.filter(todo =>{
+        const todos = this.state.todos.filter(todo =>
+        {
           return todo._id !== id;
-         });
+        });
          
-         this.setState({
-           todos
-         })
-         console.log(this.state.todos);
+         this.setState({todos});
       })
   }
 
-  
   addItem = (value) =>
   {
-    // let newItem = value;
-    // const {todos} = this.state;
+    let newItem = {content:value};
+    let headers = new Headers();
+      headers.append('Content-Type','application/json');
+      let myInit = {
+        method: 'POST',
+        headers: headers, 
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify(newItem)
+      };
+      let myRequest = new Request('http://localhost:4000/missions', myInit);
+      fetch(myRequest)
+      .then((newRocordAdded)=>  
+      {
+          newRocordAdded.json().then((data)=>{
+          if(data)
+          {
+            this.state.todos.push({_id: data._id, content: data.content})
+            console.log(this.state.todos);
+            this.setState({textarea:''})
+          }
 
-    // if(newItem) 
-    // {
-    //   todos.push({id: todos.length+1, content: newItem});
-    //   this.setState({todos});
-    //   this.setState({textarea: ''});
-    // }
+          });
+      })
   } 
 
   editItem = (id) =>
@@ -106,7 +115,7 @@ componentDidMount()
         
         <div className="center-align">
           <br></br>
-          <button className="btn waves-effect blue" type="submit" onClick={this.addItem}>
+          <button className="btn waves-effect blue" type="submit" onClick={()=>this.addItem(this.state.textarea)}>
               <b>Add a mission</b>
           </button>
           </div>
