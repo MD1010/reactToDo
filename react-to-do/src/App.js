@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import Tasks from './components/Tasks';
-
 import swal from 'sweetalert';
 
-
-class App extends Component {
-
-  constructor(props) {
+class App extends Component 
+{
+  constructor(props)
+  {
     super(props);
-
     this.state = {
       todos:[],
       textarea: ''
@@ -29,7 +27,8 @@ componentDidMount()
   {
       let headers = new Headers();
       headers.append('Content-Type','application/json');
-      let myInit = {
+      let myInit = 
+      {
         method: 'DELETE',
         headers: headers, 
         mode: 'cors',
@@ -43,36 +42,38 @@ componentDidMount()
         {
           return todo._id !== id;
         });
-         
          this.setState({todos});
       })
   }
 
   addItem = (value) =>
   {
-    let newItem = {content:value};
-    let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      let myInit = {
-        method: 'POST',
-        headers: headers, 
-        mode: 'cors',
-        cache: 'default',
-        body: JSON.stringify(newItem)
-      };
-      let myRequest = new Request('http://localhost:4000/missions', myInit);
-      fetch(myRequest)
-      .then((newRocordAdded)=>  
-      {
-          newRocordAdded.json().then((responseFromServer)=>{
-          if(responseFromServer)
-          {
-            this.state.todos.push({_id: responseFromServer._id, content: responseFromServer.content})
-            console.log(this.state.todos);
-            this.setState({textarea:''})
-          }
-          });
-      })
+    if(this.state.textarea)
+    {
+      let newItem = {content:value};
+      let headers = new Headers();
+        headers.append('Content-Type','application/json');
+        let myInit = {
+          method: 'POST',
+          headers: headers, 
+          mode: 'cors',
+          cache: 'default',
+          body: JSON.stringify(newItem)
+        };
+        let myRequest = new Request('http://localhost:4000/missions', myInit);
+        fetch(myRequest)
+        .then((newRocordAdded)=>  
+        {
+            newRocordAdded.json().then((responseFromServer)=>{
+            if(responseFromServer)
+            {
+              this.state.todos.push({_id: responseFromServer._id, content: responseFromServer.content})
+              console.log(this.state.todos);
+              this.setState({textarea:''})
+            }
+            });
+        })
+    }
   } 
 
   editItem = (id) =>
@@ -113,7 +114,6 @@ componentDidMount()
                 {
                   todos[foundIDIndex].content = result;
                   this.setState({todos});
-                  console.log(this.state.todos);
                   this.setState({textarea:''})
                 }
     

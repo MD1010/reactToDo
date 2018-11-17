@@ -4,13 +4,14 @@ import Task from './Task';
 
 const Tasks = ({todos,deleteItem,editItem}) =>
 {
-    const toDoList = todos.length ? (
+    const toDoList = todos.length ? 
+    (
         todos.map(todo =>{
             return(
                 <Task key={todo._id} todo={todo} 
                 deleteItem={deleteItem} 
-                editItem={editItem}/>      
-            )
+                editItem={editItem}/>
+                )
         })
     ) 
     :(
