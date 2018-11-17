@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Tasks from './components/Tasks';
+import makeHeaders from './helperFunctions';
 import swal from 'sweetalert';
 
 class App extends Component 
@@ -15,26 +16,18 @@ class App extends Component
 componentDidMount()
 {
   fetch('http://localhost:4000/missions')
-  .then(res => res.json())
-  .then(json => 
+  .then(responseFromServer => responseFromServer.json())
+  .then(responseFromServer => 
   {
     this.setState({
-     todos : json
+     todos : responseFromServer
     })
   })
 }
   deleteItem = (id) => 
   {
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      let myInit = 
-      {
-        method: 'DELETE',
-        headers: headers, 
-        mode: 'cors',
-        cache: 'default'
-      };
-      let myRequest = new Request('http://localhost:4000/missions/' + id, myInit);
+      let header = makeHeaders('DELETE');
+      let myRequest = new Request('http://localhost:4000/missions/' + id, header);
       fetch(myRequest)
       .then(()=>  
       {
@@ -51,16 +44,8 @@ componentDidMount()
     if(this.state.textarea)
     {
       let newItem = {content:value};
-      let headers = new Headers();
-        headers.append('Content-Type','application/json');
-        let myInit = {
-          method: 'POST',
-          headers: headers, 
-          mode: 'cors',
-          cache: 'default',
-          body: JSON.stringify(newItem)
-        };
-        let myRequest = new Request('http://localhost:4000/missions', myInit);
+      let header = makeHeaders('POST', newItem);
+        let myRequest = new Request('http://localhost:4000/missions', header);
         fetch(myRequest)
         .then((newRocordAdded)=>  
         {
@@ -95,16 +80,8 @@ componentDidMount()
           return element._id === id;
         }));
 
-        let headers = new Headers();
-          headers.append('Content-Type','application/json');
-          let myInit = {
-            method: 'PUT',
-            headers: headers, 
-            mode: 'cors',
-            cache: 'default',
-            body: JSON.stringify(newItem)
-          };
-          let myRequest = new Request('http://localhost:4000/missions/' + id, myInit);
+          let header = makeHeaders('PUT', newItem);
+          let myRequest = new Request('http://localhost:4000/missions/' + id, header);
           fetch(myRequest)
           .then((newRocordAdded)=>  
           {
