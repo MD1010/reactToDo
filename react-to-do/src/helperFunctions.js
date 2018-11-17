@@ -14,4 +14,15 @@ function makeHeaders(method,bodyRequest)
     return header;
 }
 
-export default makeHeaders;
+function findElement(array,id)
+{
+    let foundIDIndex = array.indexOf(array.find(element => 
+    {
+        return element._id === id;
+    }));
+
+    return foundIDIndex;
+
+}
+
+export {makeHeaders,findElement};
