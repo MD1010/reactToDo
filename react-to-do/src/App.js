@@ -73,26 +73,30 @@ componentDidMount()
       })
       .then((result) => 
       { 
-        const todos = this.state.todos; 
-        let newItem = {content:result}; 
-        let foundIDIndex = findElement(todos, id);
-        let header = makeHeaders('PUT', newItem);
-        let myRequest = new Request('http://localhost:4000/missions/' + id, header);
-        fetch(myRequest)
-        .then((newRocordAdded)=>  
+        if(result)
         {
-            newRocordAdded.json().then((responseFromServer)=>
-            {
-              if(responseFromServer)
+          const todos = this.state.todos; 
+          let newItem = {content:result}; 
+          let foundIDIndex = findElement(todos, id);
+          let header = makeHeaders('PUT', newItem);
+          let myRequest = new Request('http://localhost:4000/missions/' + id, header);
+          fetch(myRequest)
+          .then((newRocordAdded)=>  
+          {
+              newRocordAdded.json().then((responseFromServer)=>
               {
-                todos[foundIDIndex].content = result;
-                this.setState({todos});
-                this.setState({textarea:''})
-              }
-  
-            });
-        })
+                if(responseFromServer)
+                {
+                  todos[foundIDIndex].content = result;
+                  this.setState({todos});
+                  this.setState({textarea:''})
+                }
+    
+              });
+          })
+        }
       });
+      
   }
   handelTyping = (event) => 
   {
