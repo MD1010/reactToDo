@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+
 import Tasks from './components/Tasks';
-import {makeHeaders,findElement} from './helperFunctions';
+import Title from './components/Title';
+import Input from './components/Input';
+import Button from './components/Button';
+
+import makeHeaders from './helpers/headers';
+import {findElement} from './helpers/utils';
+import {missionsURL} from './helpers/consts';
+
 import swal from 'sweetalert';
 
 class App extends Component 
@@ -13,21 +21,23 @@ class App extends Component
       textarea: ''
     }
   }
-componentDidMount()
-{
-  fetch('http://localhost:4000/missions')
-  .then(responseFromServer => responseFromServer.json())
-  .then(responseFromServer => 
+  
+  componentDidMount()
   {
-    this.setState({
-     todos : responseFromServer
+    fetch(missionsURL)
+    .then(responseFromServer => responseFromServer.json())
+    .then(todos => 
+    {
+      this.setState({
+      todos
+      })
     })
-  })
-}
+  } 
+
   deleteItem = (id) => 
   {
       let header = makeHeaders('DELETE');
-      let myRequest = new Request('http://localhost:4000/missions/' + id, header);
+      let myRequest = new Request(`${missionsURL}/${id}`, header);
       fetch(myRequest)
       .then(()=>  
       {
@@ -45,20 +55,19 @@ componentDidMount()
     {
       let newItem = {content:value};
       let header = makeHeaders('POST', newItem);
-        let myRequest = new Request('http://localhost:4000/missions', header);
+        let myRequest = new Request(missionsURL, header);
         fetch(myRequest)
-        .then((newRocordAdded)=>  
-        {
-            newRocordAdded.json().then((responseFromServer)=>{
+        .then((newRocordAdded)=>  newRocordAdded.json())
+        .then((responseFromServer) => {
             if(responseFromServer)
             {
-              this.state.todos.push({_id: responseFromServer._id, content: responseFromServer.content})
+              let {todos} = this.state;
+              todos.push({_id: responseFromServer._id, content: responseFromServer.content})
               console.log(this.state.todos);
-              this.setState({textarea:''})
+              this.setState({todos,textarea:''})
             }
-            });
-        })
-    }
+          });
+      }
   } 
 
   editItem = (id) =>
@@ -75,11 +84,11 @@ componentDidMount()
       { 
         if(result)
         {
-          const todos = this.state.todos; 
+          const {todos} = this.state; 
           let newItem = {content:result}; 
           let foundIDIndex = findElement(todos, id);
           let header = makeHeaders('PUT', newItem);
-          let myRequest = new Request('http://localhost:4000/missions/' + id, header);
+          let myRequest = new Request(missionsURL + `/${id}` , header);
           fetch(myRequest)
           .then((newRocordAdded)=>  
           {
@@ -88,41 +97,36 @@ componentDidMount()
                 if(responseFromServer)
                 {
                   todos[foundIDIndex].content = result;
-                  this.setState({todos});
-                  this.setState({textarea:''})
+                  this.setState({todos, textarea:''})
                 }
-    
               });
           })
         }
-      });
-      
+      });   
   }
-  handelTyping = (event) => 
-  {
-    this.setState({textarea: event.target.value});
-  }
-  handleKeyPress = (event) =>
-  {
-    if(event.key === 'Enter')
+
+    handleTyping = (event) => 
     {
-      this.addItem(event.target.value); 
+      this.setState({textarea: event.target.value});
     }
-  }
+    handleKeyPress = (event) =>
+    {
+      if(event.key === 'Enter')
+      {
+        this.addItem(event.target.value); 
+      }
+    }
 
   render() {
     return (
       <div className="App container">
-        <h1 className="center title">To Do List</h1>
-        <input className="textarea" onKeyPress={this.handleKeyPress} autoFocus value={this.state.textarea} onChange={this.handelTyping}/>
-        
-        <div className="center-align">
-          <br></br>
-          <button className="btn waves-effect blue" type="submit" onClick={()=>this.addItem(this.state.textarea)}>
-              <b>Add a mission</b>
-          </button>
-          </div>
-        <br></br><br></br>
+        <Title/>
+        <Input handleKeyPress={this.handleKeyPress} 
+              textarea={this.state.textarea} 
+              handleTyping={this.handleTyping}/>
+        <Button 
+              textarea={this.state.textarea}
+              addItem={this.addItem}/>
         <Tasks todos= {this.state.todos} 
               deleteItem={this.deleteItem} 
               editItem={this.editItem}/>

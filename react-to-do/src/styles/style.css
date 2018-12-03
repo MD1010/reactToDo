@@ -17,8 +17,9 @@
 }
 .collection-item
 {
-    border: 0px solid;
+    border: 0 solid;
 }
+
 body
 {
     margin: 45px;   
@@ -60,4 +61,15 @@ body
   .swal-content__input:focus
   {
     border-color: black;
+  }
+
+  .btn
+  {
+      margin: 15px;
+      background:#5260e6;
+  }
+
+  .btn:hover
+  {
+      background:blue;
   }

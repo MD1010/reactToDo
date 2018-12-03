@@ -2,15 +2,16 @@ import React from 'react'
 import '../styles/style.css';
 import Task from './Task';
 
-const Tasks = ({todos,deleteItem,editItem}) =>
+const Tasks = ({todos, deleteItem, editItem}) =>
 {
     const toDoList = todos.length ? 
     (
         todos.map(todo =>{
             return(
-                <Task key={todo._id} todo={todo} 
-                deleteItem={deleteItem} 
-                editItem={editItem}/>
+                <Task key={todo._id} 
+                      todo={todo} 
+                      deleteItem={deleteItem} 
+                      editItem={editItem}/>
                 )
         })
     ) 
@@ -20,7 +21,7 @@ const Tasks = ({todos,deleteItem,editItem}) =>
 
     return (
         <div className="todos collection">
-        {toDoList}
+            {toDoList}
         </div>  
     );
 }
