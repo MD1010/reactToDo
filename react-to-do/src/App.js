@@ -16,10 +16,7 @@ class App extends Component
   constructor(props)
   {
     super(props);
-    this.state = {
-      todos:[],
-      textarea: ''
-    }
+    this.state = { todos:[],textarea: ''}
   }
   
   componentDidMount()
@@ -28,9 +25,7 @@ class App extends Component
     .then(responseFromServer => responseFromServer.json())
     .then(todos => 
     {
-      this.setState({
-      todos
-      })
+      this.setState({todos})
     })
   } 
 
@@ -45,7 +40,7 @@ class App extends Component
         {
           return todo._id !== id;
         });
-         this.setState({todos});
+        this.setState({todos});
       })
   }
 
@@ -55,19 +50,20 @@ class App extends Component
     {
       let newItem = {content:value};
       let header = makeHeaders('POST', newItem);
-        let myRequest = new Request(missionsURL, header);
-        fetch(myRequest)
-        .then((newRocordAdded)=>  newRocordAdded.json())
-        .then((responseFromServer) => {
-            if(responseFromServer)
-            {
-              let {todos} = this.state;
-              todos.push({_id: responseFromServer._id, content: responseFromServer.content})
-              console.log(this.state.todos);
-              this.setState({todos,textarea:''})
-            }
-          });
-      }
+      let myRequest = new Request(missionsURL, header);
+      fetch(myRequest)
+      .then((newRocordAdded)=>  newRocordAdded.json())
+      .then((responseFromServer) => 
+      {
+        if(responseFromServer)
+        {
+          let {todos} = this.state;
+          todos.push({_id: responseFromServer._id, content: responseFromServer.content})
+          console.log(this.state.todos);
+          this.setState({todos,textarea:''})
+        }
+      });
+    }
   } 
 
   editItem = (id) =>
@@ -105,17 +101,17 @@ class App extends Component
       });   
   }
 
-    handleTyping = (event) => 
+  handleTyping = (event) => 
+  {
+    this.setState({textarea: event.target.value});
+  }
+  handleKeyPress = (event) =>
+  {
+    if(event.key === 'Enter')
     {
-      this.setState({textarea: event.target.value});
+      this.addItem(event.target.value); 
     }
-    handleKeyPress = (event) =>
-    {
-      if(event.key === 'Enter')
-      {
-        this.addItem(event.target.value); 
-      }
-    }
+  }
 
   render() {
     return (
