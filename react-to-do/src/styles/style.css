@@ -66,10 +66,20 @@ body
   .btn
   {
       margin: 15px;
-      background:#5260e6;
+      border-radius: 25px;
   }
 
   .btn:hover
   {
-      background:blue;
+      cursor: pointer;
   }
+
+  .forwards:hover
+  {
+      cursor: pointer;
+  }
+
+  
+
+
+

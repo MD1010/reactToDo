@@ -1,5 +1,5 @@
 import React from 'react'
-const Button = ({textarea,addItem}) =>
+const SubmitButton = ({textarea,addItem}) =>
 {
     return(
         <div className="center-align">
@@ -9,7 +9,7 @@ const Button = ({textarea,addItem}) =>
         </div>
     );
 }
-export default Button;
+export default SubmitButton;
 
 
 

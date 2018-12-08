@@ -2,17 +2,22 @@ import React from 'react'
 import '../styles/style.css';
 import Task from './Task';
 
-const Tasks = ({todos, deleteItem, editItem}) =>
+const Tasks = ({todos, deleteItem, editItem, limitMissionsToDisplay, startIndexMission}) =>
 {
+   
     const toDoList = todos.length ? 
     (
-        todos.map(todo =>{
-            return(
+        todos.slice(startIndexMission, limitMissionsToDisplay).map(todo =>
+        {
+        
+         return(
                 <Task key={todo._id} 
-                      todo={todo} 
-                      deleteItem={deleteItem} 
-                      editItem={editItem}/>
+                        todo={todo} 
+                        deleteItem={deleteItem} 
+                        editItem={editItem}/>
                 )
+               
+          
         })
     ) 
     :(
@@ -24,5 +29,6 @@ const Tasks = ({todos, deleteItem, editItem}) =>
             {toDoList}
         </div>  
     );
+   
 }
 export default Tasks;

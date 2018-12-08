@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import Tasks from './components/Tasks';
 import Title from './components/Title';
 import Input from './components/Input';
-import Button from './components/Button';
+import SubmitButton from './components/SubmitButton';
+import ShowMoreLess from './components/ShowMoreLess';
 
 import makeHeaders from './helpers/headers';
 import {findElement} from './helpers/utils';
@@ -16,10 +17,11 @@ class App extends Component
   constructor(props)
   {
     super(props);
-    this.state = { todos:[],textarea: ''}
+    this.state = { todos:[], textarea: '',  limitMissionsToDisplay: 8, startIndexMission: 0}
+    this.getMissions();
   }
   
-  componentDidMount()
+  getMissions = ()=> 
   {
     fetch(missionsURL)
     .then(responseFromServer => responseFromServer.json())
@@ -28,7 +30,7 @@ class App extends Component
       this.setState({todos})
     })
   } 
-
+ 
   deleteItem = (id) => 
   {
       let header = makeHeaders('DELETE');
@@ -105,6 +107,7 @@ class App extends Component
   {
     this.setState({textarea: event.target.value});
   }
+
   handleKeyPress = (event) =>
   {
     if(event.key === 'Enter')
@@ -113,22 +116,38 @@ class App extends Component
     }
   }
 
-  render() {
-    return (
-      <div className="App container">
-        <Title/>
-        <Input handleKeyPress={this.handleKeyPress} 
-              textarea={this.state.textarea} 
-              handleTyping={this.handleTyping}/>
-        <Button 
-              textarea={this.state.textarea}
-              addItem={this.addItem}/>
-        <Tasks todos= {this.state.todos} 
-              deleteItem={this.deleteItem} 
-              editItem={this.editItem}/>
-      </div>
-    );
+  loadMore = () =>
+  {
+    alert("binded!!!");
   }
-}
+ 
+
+  render() {
+    // if (this.state.todos.length === 0) return <span>Loading...</span>;
+      return (
+        <div className="App container">
+          <Title/>
+          <Input handleKeyPress={this.handleKeyPress} 
+                textarea={this.state.textarea} 
+                handleTyping={this.handleTyping}/>
+          <SubmitButton 
+                textarea={this.state.textarea}
+                addItem={this.addItem}/>
+          <Tasks todos= {this.state.todos} 
+                deleteItem={this.deleteItem} 
+                editItem={this.editItem}
+                limitMissionsToDisplay={this.state.limitMissionsToDisplay}
+                startIndexMission={this.state.startIndexMission}/>
+          <ShowMoreLess limitMissionsToDisplay={this.state.limitMissionsToDisplay}
+          startIndexMission={this.state.startIndexMission}
+          todos={this.state.todos}
+          loadMore={this.loadMore}/>
+          
+        </div>
+      );
+    }
+
+  }
+
 
 export default App;
