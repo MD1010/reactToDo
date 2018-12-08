@@ -118,7 +118,12 @@ class App extends Component
 
   loadMore = () =>
   {
-    alert("binded!!!");
+    this.setState({startIndexMission:this.state.startIndexMission + this.state.limitMissionsToDisplay});
+  }
+
+  loadLess = () =>
+  {
+    this.setState({startIndexMission:this.state.startIndexMission - this.state.limitMissionsToDisplay});
   }
  
 
@@ -141,7 +146,8 @@ class App extends Component
           <ShowMoreLess limitMissionsToDisplay={this.state.limitMissionsToDisplay}
           startIndexMission={this.state.startIndexMission}
           todos={this.state.todos}
-          loadMore={this.loadMore}/>
+          loadMore={this.loadMore}
+          loadLess={this.loadLess}/>
           
         </div>
       );

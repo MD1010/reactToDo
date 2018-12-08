@@ -7,7 +7,7 @@ const Tasks = ({todos, deleteItem, editItem, limitMissionsToDisplay, startIndexM
    
     const toDoList = todos.length ? 
     (
-        todos.slice(startIndexMission, limitMissionsToDisplay).map(todo =>
+        todos.slice(startIndexMission, startIndexMission + limitMissionsToDisplay).map(todo =>
         {
         
          return(
