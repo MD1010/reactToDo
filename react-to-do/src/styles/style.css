@@ -84,5 +84,23 @@ body
       cursor: pointer;
   }
 
-
-
+.spinner:empty
+{
+    position: absolute;
+    top: calc(50% - 4em);
+    left: calc(50% - 4em);
+    width: 7em;
+    height: 7em;
+    border: 1.1em solid rgba(8, 70, 16, 0.2);
+    border-left: 1.1em solid #228db8;
+    border-radius: 50%;
+    animation: loader 1.1s infinite linear;
+}
+    
+@keyframes loader 
+{
+    100% 
+    {
+        transform: rotate(360deg);
+    }
+}

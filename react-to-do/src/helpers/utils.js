@@ -8,4 +8,17 @@ function findElement(array,id)
     return foundIDIndex;
 }
 
-export {findElement};
+function getTasks(missionsURL)
+{
+    return fetch(missionsURL);
+}
+
+function returnPromise()
+{
+    return new Promise((resolve, reject) => {
+        resolve("Hi");
+        reject("Bye")
+    })
+}
+
+export {findElement, getTasks, returnPromise};

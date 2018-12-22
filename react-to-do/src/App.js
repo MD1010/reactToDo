@@ -7,23 +7,31 @@ import SubmitButton from './components/SubmitButton';
 import ShowMoreLess from './components/ShowMoreLess';
 
 import makeHeaders from './helpers/headers';
-import {findElement} from './helpers/utils';
+import {findElement, getTasks} from './helpers/utils';
 import {missionsURL} from './helpers/consts';
 
 import swal from 'sweetalert';
 
 class App extends Component 
 {
-  constructor(props)
-  {
-    super(props);
-    this.state = { todos:[], textarea: '',  limitMissionsToDisplay: 8, startIndexMission: 0}
+    constructor(props)
+    {
+      super(props);
+      this.state = { todos:[], textarea: '',  
+      limitMissionsToDisplay: 8, startIndexMission: 0,
+      loading:true
+    }
+
     this.getMissions();
+  }
+  
+  componentDidMount() {
+    setTimeout(() => this.setState({ loading: false }), 1500);
   }
   
   getMissions = ()=> 
   {
-    fetch(missionsURL)
+    getTasks(missionsURL)
     .then(responseFromServer => responseFromServer.json())
     .then(todos => 
     {
@@ -35,7 +43,7 @@ class App extends Component
   {
       let header = makeHeaders('DELETE');
       let myRequest = new Request(`${missionsURL}/${id}`, header);
-      fetch(myRequest)
+      getTasks(myRequest)
       .then(()=>  
       {
         const todos = this.state.todos.filter(todo =>
@@ -53,7 +61,7 @@ class App extends Component
       let newItem = {content:value};
       let header = makeHeaders('POST', newItem);
       let myRequest = new Request(missionsURL, header);
-      fetch(myRequest)
+      getTasks(myRequest)
       .then((newRocordAdded)=>  newRocordAdded.json())
       .then((responseFromServer) => 
       {
@@ -87,7 +95,7 @@ class App extends Component
           let foundIDIndex = findElement(todos, id);
           let header = makeHeaders('PUT', newItem);
           let myRequest = new Request(missionsURL + `/${id}` , header);
-          fetch(myRequest)
+          getTasks(myRequest)
           .then((newRocordAdded)=>  
           {
               newRocordAdded.json().then((responseFromServer)=>
@@ -128,7 +136,11 @@ class App extends Component
  
 
   render() {
-    // if (this.state.todos.length === 0) return <span>Loading...</span>;
+    const { loading } = this.state;
+    
+    if(loading) { 
+      return <div className="spinner"></div>; 
+    }
       return (
         <div className="App container">
           <Title/>
@@ -144,11 +156,10 @@ class App extends Component
                 limitMissionsToDisplay={this.state.limitMissionsToDisplay}
                 startIndexMission={this.state.startIndexMission}/>
           <ShowMoreLess limitMissionsToDisplay={this.state.limitMissionsToDisplay}
-          startIndexMission={this.state.startIndexMission}
-          todos={this.state.todos}
-          loadMore={this.loadMore}
-          loadLess={this.loadLess}/>
-          
+                startIndexMission={this.state.startIndexMission}
+                todos={this.state.todos}
+                loadMore={this.loadMore}
+                loadLess={this.loadLess}/>
         </div>
       );
     }
