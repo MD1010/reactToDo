@@ -1,3 +1,6 @@
+import {missionsURL} from './consts'
+import makeHeaders from './headers';
+
 function findElement(array,id)
 {
     let foundIDIndex = array.indexOf(array.find(element => 
@@ -8,17 +11,18 @@ function findElement(array,id)
     return foundIDIndex;
 }
 
-function getTasks(missionsURL)
+function getTasks()
 {
-    return fetch(missionsURL);
+    return fetch(missionsURL)
+        .then(response => response.json());
 }
 
-function returnPromise()
+function deleteTask(taskId)
 {
-    return new Promise((resolve, reject) => {
-        resolve("Hi");
-        reject("Bye")
-    })
+    let header = makeHeaders('DELETE');
+    let myRequest = new Request(`${missionsURL}/${taskId}`, header);
+    return fetch(myRequest)
+        .then(response => response.json());
 }
 
-export {findElement, getTasks, returnPromise};
+export {findElement, getTasks, deleteTask};

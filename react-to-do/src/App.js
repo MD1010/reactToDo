@@ -7,7 +7,7 @@ import SubmitButton from './components/SubmitButton';
 import ShowMoreLess from './components/ShowMoreLess';
 
 import makeHeaders from './helpers/headers';
-import {findElement, getTasks} from './helpers/utils';
+import {findElement, getTasks, deleteTask} from './helpers/utils';
 import {missionsURL} from './helpers/consts';
 
 import swal from 'sweetalert';
@@ -19,31 +19,21 @@ class App extends Component
       super(props);
       this.state = { todos:[], textarea: '',  
       limitMissionsToDisplay: 8, startIndexMission: 0,
-      loading:true
+      loading:false
     }
-
-    this.getMissions();
   }
   
   componentDidMount() {
-    setTimeout(() => this.setState({ loading: false }), 1500);
+    
+    this.setState({loading:true})
+    getTasks()
+      .then(todos => { setTimeout(()=>{this.setState({todos,  loading: false})},1500);
+      })
   }
   
-  getMissions = ()=> 
-  {
-    getTasks(missionsURL)
-    .then(responseFromServer => responseFromServer.json())
-    .then(todos => 
-    {
-      this.setState({todos})
-    })
-  } 
- 
   deleteItem = (id) => 
   {
-      let header = makeHeaders('DELETE');
-      let myRequest = new Request(`${missionsURL}/${id}`, header);
-      getTasks(myRequest)
+      deleteTask(id)
       .then(()=>  
       {
         const todos = this.state.todos.filter(todo =>
