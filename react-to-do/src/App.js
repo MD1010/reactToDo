@@ -6,9 +6,9 @@ import Input from './components/Input';
 import SubmitButton from './components/SubmitButton';
 import ShowMoreLess from './components/ShowMoreLess';
 
-import makeHeaders from './helpers/headers';
-import {findElement, getTasks, deleteTask} from './helpers/utils';
-import {missionsURL} from './helpers/consts';
+
+import {findElement, getTasks, deleteTask, addTask, editTask} from './helpers/utils';
+
 
 import swal from 'sweetalert';
 
@@ -48,11 +48,7 @@ class App extends Component
   {
     if(this.state.textarea)
     {
-      let newItem = {content:value};
-      let header = makeHeaders('POST', newItem);
-      let myRequest = new Request(missionsURL, header);
-      getTasks(myRequest)
-      .then((newRocordAdded)=>  newRocordAdded.json())
+      addTask(value)
       .then((responseFromServer) => 
       {
         if(responseFromServer)
@@ -68,6 +64,7 @@ class App extends Component
 
   editItem = (id) =>
   {
+    
     swal(
       {
           title: "edit your task here:",
@@ -78,27 +75,25 @@ class App extends Component
       })
       .then((result) => 
       { 
+        const {todos} = this.state; 
+        let newItem = {content:result}; 
+        let foundIDIndex = findElement(todos, id);
+
         if(result)
         {
-          const {todos} = this.state; 
-          let newItem = {content:result}; 
-          let foundIDIndex = findElement(todos, id);
-          let header = makeHeaders('PUT', newItem);
-          let myRequest = new Request(missionsURL + `/${id}` , header);
-          getTasks(myRequest)
-          .then((newRocordAdded)=>  
+          editTask(id, newItem)
+          .then(responseFromServer=>
           {
-              newRocordAdded.json().then((responseFromServer)=>
+              if(responseFromServer)
               {
-                if(responseFromServer)
-                {
-                  todos[foundIDIndex].content = result;
-                  this.setState({todos, textarea:''})
-                }
-              });
-          })
+                todos[foundIDIndex].content = result;
+                this.setState({todos, textarea:''})
+              }
+          });
         }
-      });   
+      });
+        
+          
   }
 
   handleTyping = (event) => 

@@ -25,4 +25,22 @@ function deleteTask(taskId)
         .then(response => response.json());
 }
 
-export {findElement, getTasks, deleteTask};
+function addTask(value){
+
+    let newItem = {content:value};
+    let header = makeHeaders('POST', newItem);
+    let myRequest = new Request(missionsURL, header);
+    return fetch(myRequest)
+    .then((newRecordAdded)=>  newRecordAdded.json())
+}
+
+function editTask(taskId, newItem){
+   
+    let header = makeHeaders('PUT', newItem);
+    let myRequest = new Request(missionsURL + `/${taskId}` , header);
+    return fetch(myRequest)
+    .then((newRecordAdded)=>  newRecordAdded.json())
+    
+}
+
+export {findElement, getTasks, deleteTask, addTask, editTask};
