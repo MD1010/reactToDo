@@ -7,10 +7,11 @@ import SubmitButton from './components/SubmitButton';
 import ShowMoreLess from './components/ShowMoreLess';
 
 
-import {findElement, getTasks, deleteTask, addTask, editTask} from './helpers/utils';
+import {findElement, deleteTask, addTask, editTask, getTasksFromDB} from './helpers/utils';
 
 
 import swal from 'sweetalert';
+import { missionsURL } from './helpers/consts';
 
 class App extends Component 
 {
@@ -18,7 +19,7 @@ class App extends Component
     {
       super(props);
       this.state = { todos:[], textarea: '',  
-      limitMissionsToDisplay: 8, startIndexMission: 0,
+      limitMissionsToDisplay:4, startIndexMission: 0,
       loading:false
     }
   }
@@ -26,9 +27,25 @@ class App extends Component
   componentDidMount() {
     
     this.setState({loading:true})
-    getTasks()
+      getTasksFromDB(missionsURL)
       .then(todos => { setTimeout(()=>{this.setState({todos,  loading: false})},1500);
-      })
+      let titleElement = Title.offsetHeighast
+
+      // let inputElement = ReactDOM.findDOMNode(this.refs.input)
+      // let submitButtonElement = ReactDOM.findDOMNode(this.refs.submitButton)
+      // let tasksElement = ReactDOM.findDOMNode(this.refs.tasks)
+      // let showMoreLessElement = ReactDOM.findDOMNode(this.refs.showMoreLess)
+      
+      
+      // let inputHeight = inputElement.clientHeight
+      // let submitButtonHeight = submitButtonElement.clientHeight
+      // let tasksHeight = tasksElement.clientHeight
+      // let showMoreLessHeight = showMoreLessElement.clientHeight
+
+      // let totalHeight = titleHeight +  inputHeight +
+      // submitButtonHeight + tasksHeight + showMoreLessHeight
+       console.log(titleElement)
+    })
   }
   
   deleteItem = (id) => 
@@ -46,7 +63,7 @@ class App extends Component
 
   addItem = (value) =>
   {
-    if(this.state.textarea)
+    if(this.state.textarea.trim())
     {
       addTask(value)
       .then((responseFromServer) => 
@@ -64,7 +81,6 @@ class App extends Component
 
   editItem = (id) =>
   {
-    
     swal(
       {
           title: "edit your task here:",
@@ -91,9 +107,7 @@ class App extends Component
               }
           });
         }
-      });
-        
-          
+      }); 
   }
 
   handleTyping = (event) => 
@@ -119,7 +133,7 @@ class App extends Component
     this.setState({startIndexMission:this.state.startIndexMission - this.state.limitMissionsToDisplay});
   }
  
-
+  
   render() {
     const { loading } = this.state;
     
@@ -150,6 +164,5 @@ class App extends Component
     }
 
   }
-
 
 export default App;
