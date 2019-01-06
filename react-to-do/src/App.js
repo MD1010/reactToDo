@@ -28,23 +28,9 @@ class App extends Component
     
     this.setState({loading:true})
       getTasksFromDB(missionsURL)
-      .then(todos => { setTimeout(()=>{this.setState({todos,  loading: false})},1500);
-      let titleElement = Title.offsetHeighast
-
-      // let inputElement = ReactDOM.findDOMNode(this.refs.input)
-      // let submitButtonElement = ReactDOM.findDOMNode(this.refs.submitButton)
-      // let tasksElement = ReactDOM.findDOMNode(this.refs.tasks)
-      // let showMoreLessElement = ReactDOM.findDOMNode(this.refs.showMoreLess)
+      .then(todos => { setTimeout(()=>{this.setState({todos,  loading: false})},0);
       
       
-      // let inputHeight = inputElement.clientHeight
-      // let submitButtonHeight = submitButtonElement.clientHeight
-      // let tasksHeight = tasksElement.clientHeight
-      // let showMoreLessHeight = showMoreLessElement.clientHeight
-
-      // let totalHeight = titleHeight +  inputHeight +
-      // submitButtonHeight + tasksHeight + showMoreLessHeight
-       console.log(titleElement)
     })
   }
   
@@ -95,7 +81,7 @@ class App extends Component
         let newItem = {content:result}; 
         let foundIDIndex = findElement(todos, id);
 
-        if(result)
+        if(result.trim())
         {
           editTask(id, newItem)
           .then(responseFromServer=>

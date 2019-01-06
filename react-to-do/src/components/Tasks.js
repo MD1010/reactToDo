@@ -25,7 +25,7 @@ const Tasks = ({todos, deleteItem, editItem, limitMissionsToDisplay, startIndexM
     )
 
     return (
-        <div className="todos collection">
+        <div className="todos collection" id='tasks'>
             {toDoList}
         </div>  
     );
