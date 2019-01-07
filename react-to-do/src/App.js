@@ -6,9 +6,7 @@ import Input from './components/Input';
 import SubmitButton from './components/SubmitButton';
 import ShowMoreLess from './components/ShowMoreLess';
 
-
 import {findElement, deleteTask, addTask, editTask, getTasksFromDB} from './helpers/utils';
-
 
 import swal from 'sweetalert';
 import { missionsURL } from './helpers/consts';
@@ -17,23 +15,29 @@ class App extends Component
 {
     constructor(props)
     {
+      console.log("constructor")
       super(props);
-      this.state = { todos:[], textarea: '',  
-      limitMissionsToDisplay:4, startIndexMission: 0,
-      loading:false
-    }
+      this.state = 
+      {
+        todos:[], textarea: '',  
+        limitMissionsToDisplay:0, startIndexMission: 0,
+        loading:false
+      }
+      
   }
-  
+ componentWillMount(){
+  this.setState({loading:true})
+ }
   componentDidMount() {
-    
-    this.setState({loading:true})
+      console.log("component did mount")
       getTasksFromDB(missionsURL)
       .then(todos => { setTimeout(()=>{this.setState({todos,  loading: false})},0);
-      
-      
     })
   }
   
+  setMaxAmmountOfMissions = (limitMissionsToDisplay)=>{
+    this.setState({limitMissionsToDisplay})
+  }
   deleteItem = (id) => 
   {
       deleteTask(id)
@@ -121,6 +125,8 @@ class App extends Component
  
   
   render() {
+    console.log("render");
+    
     const { loading } = this.state;
     
     if(loading) { 
@@ -135,9 +141,11 @@ class App extends Component
           <SubmitButton 
                 textarea={this.state.textarea}
                 addItem={this.addItem}/>
-          <Tasks todos= {this.state.todos} 
+          <Tasks 
+                todos={this.state.todos} 
                 deleteItem={this.deleteItem} 
                 editItem={this.editItem}
+                setMaxAmmountOfMissions={this.setMaxAmmountOfMissions}
                 limitMissionsToDisplay={this.state.limitMissionsToDisplay}
                 startIndexMission={this.state.startIndexMission}/>
           <ShowMoreLess limitMissionsToDisplay={this.state.limitMissionsToDisplay}
