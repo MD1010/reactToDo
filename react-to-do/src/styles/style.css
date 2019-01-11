@@ -18,6 +18,17 @@
 .collection-item
 {
     border: 0 solid;
+    display: flex;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0px;
+}
+ .collection-item .mission-text 
+{
+    width:85%;
+    overflow: hidden;
+    white-space: initial;
 }
 
 body

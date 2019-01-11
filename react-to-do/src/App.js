@@ -20,7 +20,7 @@ class App extends Component
       this.state = 
       {
         todos:[], textarea: '',  
-        limitMissionsToDisplay:0, startIndexMission: 0,
+        limitMissionsToDisplay:undefined, startIndexMission: 0,
         loading:false
       }
       
@@ -84,19 +84,22 @@ class App extends Component
         const {todos} = this.state; 
         let newItem = {content:result}; 
         let foundIDIndex = findElement(todos, id);
-
-        if(result.trim())
+        if(result)
         {
-          editTask(id, newItem)
-          .then(responseFromServer=>
+          if(result.trim())
           {
-              if(responseFromServer)
-              {
-                todos[foundIDIndex].content = result;
-                this.setState({todos, textarea:''})
-              }
-          });
+            editTask(id, newItem)
+            .then(responseFromServer=>
+            {
+                if(responseFromServer)
+                {
+                  todos[foundIDIndex].content = result;
+                  this.setState({todos, textarea:''})
+                }
+            });
+          }
         }
+        
       }); 
   }
 
