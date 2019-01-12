@@ -5,7 +5,7 @@ import MenuComponent from '../src/components/MenuComponent'
 import * as serviceWorker from './serviceWorker';
 // import Bootstrap from 'bootstrap/dist/css/bootstrap.css'
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(<MenuComponent/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
