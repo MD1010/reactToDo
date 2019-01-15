@@ -14,7 +14,7 @@ class SignUp extends Component {
             formErrors: {
                 userName: "",
                 email: "",
-                password: ""
+                password: "123"
             }
         }
     }
