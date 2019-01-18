@@ -6,7 +6,7 @@ class MenuComponent extends Component
        return (
         <div className="row">
             <div className="card">
-                <div className="card-acion teal white-text center">
+                <div className="card-acion center">
                         <h3>
                             Login
                         </h3>
