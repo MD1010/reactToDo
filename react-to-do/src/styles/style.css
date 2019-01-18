@@ -115,3 +115,93 @@ body
         transform: rotate(360deg);
     }
 }
+
+body{
+    background: black;
+    overflow-x: hidden; 
+    overflow-y: hidden;
+    /* min-width:637px; */
+}
+
+::-webkit-input-placeholder 
+{
+    text-align: center;
+    color:grey
+}
+
+.error-label
+{
+    color:red;
+    font-weight: bold;
+    widows: 100%;; 
+}
+
+.input-error{
+    border: 1px solid red
+}
+
+.field
+{
+    width: 70%;
+    display: inline-flex;
+    align-items: center;
+}
+
+.title{
+    text-align: center;
+    font-size: 28px;
+    color: white;
+    margin: 5px;
+    align-content: center;
+    font-weight: bold;
+
+}
+
+.label{
+    font-size: 14px;
+    color:goldenrod;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-right: 5px;
+}
+
+td{
+    width:150px;
+}
+
+.input-bar , .error{
+    color: white;
+    text-align: center;
+    padding: 3px;
+}
+
+#submit-button{
+    
+   margin-top:35px;
+   font-size:16px;
+   font-weight: bold;
+   background: black;
+   color:white;
+   border:0.5px solid;
+   text-transform: none;
+   border-radius: 10px;
+   text-emphasis: bold;
+   padding:10px;
+}
+
+#submit-button:hover{
+    background: white;
+    border-radius: 10px;
+    color:black;
+    cursor: pointer;
+}
+
+.signUpForm
+{
+    display: block;
+    border: 1px solid;
+    background: black;  
+}
+
+
+
