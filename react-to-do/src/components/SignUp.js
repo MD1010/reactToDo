@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { CLIENT_RENEG_WINDOW } from 'tls';
 
 class SignUp extends Component {
     constructor(props) {
@@ -9,6 +8,7 @@ class SignUp extends Component {
             userName: "",
             password: "",
             email: "",
+            submitted: false,
         
             formErrors: {
                 userName: "",
@@ -19,14 +19,17 @@ class SignUp extends Component {
     }
 
     submitForm = (event) => {
+        this.setState({submitted: true})
         event.preventDefault()
         this.validateFormFields().then((valid)=>{
             
             if(valid){
-                this.setState({
+                console.log(`--- new user details ---\n userName:${this.state.userName} \n userName:${this.state.userName} \n email:${this.state.email}`) 
+                 this.setState({
                     userName: "",
                     password: "",
                     email: "",
+                    submitted: false,
     
                     formErrors: {
                         userName: "",
@@ -34,8 +37,9 @@ class SignUp extends Component {
                         password: ""
                     }
                 })
+                
             }
-
+            
             else
                 console.error("Invalid form")
         })
@@ -44,7 +48,7 @@ class SignUp extends Component {
    
     validateFormFields = async () => 
     {
-        let { formErrors, userName, password, email } = this.state
+        let { userName, password, email } = this.state
         let valid = true
         const passwordRegex = RegExp(/.{4,9}/)
         const emailRegex = RegExp(
@@ -72,6 +76,7 @@ class SignUp extends Component {
     handleChange = (event) => {
         let { id, value } = event.target;
         this.setState({ [id]: value }, ()=>{
+            if(this.state.submitted)
             this.validateFormFields()
         });
     }
@@ -89,9 +94,6 @@ class SignUp extends Component {
                         <tbody>
                             <tr className="username field">
                                 <td>
-                                    <label className="label">username</label>
-                                </td>
-                                <td>
                                     <input autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="username" type="text" id="userName" value={this.state.userName} onChange={this.handleChange} maxLength="13"></input>
                                 </td>
                                 <td>
@@ -102,21 +104,15 @@ class SignUp extends Component {
                         <tbody>
                             <tr className="email field">
                                 <td>
-                                    <label className="label">email</label>
-                                </td>
-                                <td>
-                                    <input autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange} maxLength="13"></input>                            
+                                    <input autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange}></input>                            
                                 </td>
                                 <td>
                                     <label className="error-label">{formErrors.email}</label>
                                 </td>
                             </tr>
                         </tbody>
-                        <tdbody>
-                            <tr className="password field">
-                                <td>
-                                    <label className="label">password</label>
-                                </td>
+                        <tbody>
+                            <tr className="password field"> 
                                 <td>
                                     <input autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
                                 </td>
@@ -124,10 +120,15 @@ class SignUp extends Component {
                                     <label className="error-label">{formErrors.password}</label>
                                 </td>
                             </tr>
-                        </tdbody> 
+                        </tbody> 
+                        <tbody>
+                            <tr> 
+                                <button type="submit" id="submit-button" >Create Account</button>
+                            </tr>
+                        </tbody> 
                     </table>   
                      
-                   <button type="submit" id="submit-button" >Create Account</button>
+                  
                     
                 </form>
             </div>

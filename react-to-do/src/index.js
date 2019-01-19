@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import MenuComponent from '../src/components/MenuComponent'
 import * as serviceWorker from './serviceWorker';
 import SignUp from './components/SignUp';
-// import Bootstrap from 'bootstrap/dist/css/bootstrap.css'
 
 ReactDOM.render(<SignUp/>, document.getElementById('root'));
 

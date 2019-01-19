@@ -1,4 +1,4 @@
-import { getMyIpAddress } from './utils'
+//import { getMyIpAddress } from './utils'
 
 // const myIpAddress = getMyIpAddress().then(ip=>{return ip});
 // const missionsURL = `http://${myIpAddress}:4000/missions`;
