@@ -187,7 +187,7 @@ td{
    border-radius: 10px;
    text-emphasis: bold;
    padding:10px;
-   margin-left:10%;
+   margin-left:7%;
    margin-top:5%;
 }
 
@@ -205,12 +205,10 @@ td{
     background: black;  
 }
 form{
-    margin-left: 650px;
+    margin-left: 38%;
 }
 
-
 div.title {
-    margin-bottom: 40px;
-    padding: 20px;
+    margin-bottom: 2%;
     font-size:44px;
 }
