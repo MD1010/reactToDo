@@ -15,7 +15,6 @@ class App extends Component
 {
     constructor(props)
     {
-      console.log("constructor")
       super(props);
       this.state = 
       {
@@ -29,7 +28,6 @@ class App extends Component
   this.setState({loading:true})
  }
   componentDidMount() {
-      console.log("component did mount")
       getTasksFromDB(missionsURL)
       .then(todos => { setTimeout(()=>{this.setState({todos,  loading: false})},0);
     })
@@ -62,7 +60,6 @@ class App extends Component
         {
           let {todos} = this.state;
           todos.push({_id: responseFromServer._id, content: responseFromServer.content})
-          console.log(this.state.todos);
           this.setState({todos,textarea:''})
         }
       });
@@ -128,8 +125,6 @@ class App extends Component
  
   
   render() {
-    console.log("render");
-    
     const { loading } = this.state;
     
     if(loading) { 

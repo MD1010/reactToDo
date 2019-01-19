@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import makeHeaders from '../helpers/headers';
 
 class SignUp extends Component {
     constructor(props) {
@@ -21,11 +22,20 @@ class SignUp extends Component {
     submitForm = (event) => {
         this.setState({submitted: true})
         event.preventDefault()
+        let newUserData = {userName:"", password:"", email:""}
         this.validateFormFields().then((valid)=>{
             
             if(valid){
                 console.log(`--- new user details ---\n userName:${this.state.userName} \n userName:${this.state.userName} \n email:${this.state.email}`) 
-                 this.setState({
+                let { userName, password, email } = this.state
+                newUserData.userName = userName
+                newUserData.password = password
+                newUserData.email = email
+
+                makeHeaders('POST',newUserData) 
+                //let myRequest = new Request(`${missionsURL}/${taskId}`, header);
+                //return fetchFromDB(myRequest)
+                this.setState({
                     userName: "",
                     password: "",
                     email: "",
@@ -123,7 +133,9 @@ class SignUp extends Component {
                         </tbody> 
                         <tbody>
                             <tr> 
-                                <button type="submit" id="submit-button" >Create Account</button>
+                                <td>
+                                    <button type="submit" id="submit-button" >Create Account</button>
+                                </td>
                             </tr>
                         </tbody> 
                     </table>   
