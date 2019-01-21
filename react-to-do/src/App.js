@@ -5,9 +5,8 @@ import Title from './components/Title';
 import Input from './components/Input';
 import SubmitButton from './components/SubmitButton';
 import ShowMoreLess from './components/ShowMoreLess';
-
-import {findElement, deleteTask, addTask, editTask, getTasksFromDB} from './helpers/utils';
-
+import {findElement, deleteData, postData, putData, getData} from './helpers/utils';
+import './styles/tasks.css'
 import swal from 'sweetalert';
 import { missionsURL } from './helpers/consts';
 
@@ -28,7 +27,7 @@ class App extends Component
   this.setState({loading:true})
  }
   componentDidMount() {
-      getTasksFromDB(missionsURL)
+      getData(missionsURL)
       .then(todos => { setTimeout(()=>{this.setState({todos,  loading: false})},0);
     })
   }
@@ -38,7 +37,7 @@ class App extends Component
   }
   deleteItem = (id) => 
   {
-      deleteTask(id)
+      deleteData(missionsURL, id)
       .then(()=>  
       {
         const todos = this.state.todos.filter(todo =>
@@ -51,9 +50,10 @@ class App extends Component
 
   addItem = (value) =>
   {
+    let newData = {content: value}
     if(this.state.textarea.trim())
     {
-      addTask(value)
+      postData(missionsURL, newData, value)
       .then((responseFromServer) => 
       {
         if(responseFromServer)
@@ -85,7 +85,7 @@ class App extends Component
         {
           if(result.trim())
           {
-            editTask(id, newItem)
+            putData(missionsURL, id, newItem)
             .then(responseFromServer=>
             {
                 if(responseFromServer)

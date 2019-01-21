@@ -32,38 +32,36 @@ function getMyIpAddress()
         }
     }) 
 }
-function getTasksFromDB(missionsURL){
+function getData(missionsURL){
     return fetch(missionsURL)
     .then(response => response.json())
 }
 
-function fetchFromDB(myRequest)
+function changeData(myRequest)
 {
     return fetch(myRequest)
         .then(response => response.json());
 }
 
-function deleteTask(taskId)
+function deleteData(url,id)
 {
     let header = makeHeaders('DELETE');
-    let myRequest = new Request(`${missionsURL}/${taskId}`, header);
-   return fetchFromDB(myRequest)
+    let myRequest = new Request(`${url}/${id}`, header);
+    return changeData(myRequest)
 }
 
-function addTask(value){
-
-    let newItem = {content:value};
-    let header = makeHeaders('POST', newItem);
-    let myRequest = new Request(missionsURL, header);
-    return fetchFromDB(myRequest)
+function postData(url, newData){
+    let header = makeHeaders('POST', newData);
+    let myRequest = new Request(url, header);
+    return changeData(myRequest)
 }
 
-function editTask(taskId, newItem){
+function putData(url, id, newData){
    
-    let header = makeHeaders('PUT', newItem);
-    let myRequest = new Request(missionsURL + `/${taskId}` , header);
-    return fetchFromDB(myRequest)
+    let header = makeHeaders('PUT', newData);
+    let myRequest = new Request(url + `/${id}` , header);
+    return changeData(myRequest)
     
 }
 
-export {findElement, fetchFromDB, deleteTask, addTask, editTask, getTasksFromDB, getMyIpAddress};
+export {findElement, changeData , deleteData, postData, putData, getData , getMyIpAddress};

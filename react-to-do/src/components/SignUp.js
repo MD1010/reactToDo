@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import makeHeaders from '../helpers/headers';
+import '../styles/login.css'
 
 class SignUp extends Component {
     constructor(props) {
@@ -32,9 +33,11 @@ class SignUp extends Component {
                 newUserData.password = password
                 newUserData.email = email
 
-                makeHeaders('POST',newUserData) 
-                //let myRequest = new Request(`${missionsURL}/${taskId}`, header);
-                //return fetchFromDB(myRequest)
+                let header = makeHeaders('POST',newUserData) 
+                let myRequest = new Request('http://localhost:4000/Users/', header);
+                fetch(myRequest)
+                .then(response => console.log(response.json()));
+
                 this.setState({
                     userName: "",
                     password: "",
