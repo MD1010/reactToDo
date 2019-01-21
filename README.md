@@ -7,6 +7,6 @@
   * shall each user see his tasks 
   * move to redux and fix the code to be more readable
   * make authentication with google and facebook
-  *fix the style and the css overall
+  * fix the style and the css overall
 # if the site doesnt load change the missionsURL to be the url of the computer
 
