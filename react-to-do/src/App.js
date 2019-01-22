@@ -6,7 +6,7 @@ import Input from './components/Input';
 import SubmitButton from './components/SubmitButton';
 import ShowMoreLess from './components/ShowMoreLess';
 import {findElement, deleteData, postData, putData, getData} from './helpers/utils';
-import './styles/tasks.css'
+
 import swal from 'sweetalert';
 import { missionsURL } from './helpers/consts';
 
@@ -53,7 +53,7 @@ class App extends Component
     let newData = {content: value}
     if(this.state.textarea.trim())
     {
-      postData(missionsURL, newData, value)
+      postData(missionsURL, newData)
       .then((responseFromServer) => 
       {
         if(responseFromServer)

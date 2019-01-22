@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/tasks.css'
 import Task from './Task';
 import $ from 'jquery';
 

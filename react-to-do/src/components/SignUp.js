@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
-import makeHeaders from '../helpers/headers';
+import React, { Component } from 'react'
+import { postData } from '../helpers/utils'
+import { usersURL } from '../helpers/consts'
 import '../styles/login.css'
+import $ from 'jquery'
 
 class SignUp extends Component {
     constructor(props) {
@@ -19,38 +21,46 @@ class SignUp extends Component {
             }
         }
     }
-
+    componentDidMount(){
+        $("#userName").focus();
+    }
+    
     submitForm = (event) => {
         this.setState({submitted: true})
         event.preventDefault()
         let newUserData = {userName:"", password:"", email:""}
         this.validateFormFields().then((valid)=>{
-            
+
             if(valid){
-                console.log(`--- new user details ---\n userName:${this.state.userName} \n userName:${this.state.userName} \n email:${this.state.email}`) 
+                console.log(`--- new user details ---\n userName:${this.state.userName} \n password:${this.state.password} \n email:${this.state.email}`) 
                 let { userName, password, email } = this.state
                 newUserData.userName = userName
                 newUserData.password = password
                 newUserData.email = email
-
-                let header = makeHeaders('POST',newUserData) 
-                let myRequest = new Request('http://localhost:4000/Users/', header);
-                fetch(myRequest)
-                .then(response => console.log(response.json()));
-
-                this.setState({
-                    userName: "",
-                    password: "",
-                    email: "",
-                    submitted: false,
-    
-                    formErrors: {
-                        userName: "",
-                        email: "",
-                        password: ""
-                    }
-                })
                 
+                postData(usersURL, newUserData).then(responseFromServer=>{
+                   if(responseFromServer.error){
+                      this.setState({formErrors:{userName:"username already taken"}})
+                       valid = false
+                   }
+                       
+                },()=>{
+                    if(valid){
+                        this.setState({
+                            userName: "",
+                            password: "",
+                            email: "",
+                            submitted: false,
+            
+                            formErrors: {
+                                userName: "",
+                                email: "",
+                                password: ""
+                            }
+                        })
+                    }
+                }) 
+                $("#userName").focus();
             }
             
             else
@@ -63,7 +73,7 @@ class SignUp extends Component {
     {
         let { userName, password, email } = this.state
         let valid = true
-        const passwordRegex = RegExp(/.{4,9}/)
+        const passwordRegex = RegExp(/^.{4,8}$/)
         const emailRegex = RegExp(
             /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
             );
@@ -107,7 +117,7 @@ class SignUp extends Component {
                         <tbody>
                             <tr className="username field">
                                 <td>
-                                    <input autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="username" type="text" id="userName" value={this.state.userName} onChange={this.handleChange} maxLength="13"></input>
+                                    <input spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="username" type="text" id="userName" value={this.state.userName} onChange={this.handleChange} maxLength="13"></input>
                                 </td>
                                 <td>
                                     <label className="error-label">{formErrors.userName}</label>
@@ -117,7 +127,7 @@ class SignUp extends Component {
                         <tbody>
                             <tr className="email field">
                                 <td>
-                                    <input autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange}></input>                            
+                                    <input spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange}></input>                            
                                 </td>
                                 <td>
                                     <label className="error-label">{formErrors.email}</label>
@@ -127,7 +137,7 @@ class SignUp extends Component {
                         <tbody>
                             <tr className="password field"> 
                                 <td>
-                                    <input autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
+                                    <input spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
                                 </td>
                                 <td>
                                     <label className="error-label">{formErrors.password}</label>
