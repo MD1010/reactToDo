@@ -39,13 +39,10 @@ class SignUp extends Component {
                 newUserData.email = email
                 
                 postData(usersURL, newUserData).then(responseFromServer=>{
-                   if(responseFromServer.error){
+                    
+                   if(responseFromServer.error)
                       this.setState({formErrors:{userName:"username already taken"}})
-                       valid = false
-                   }
-                       
-                },()=>{
-                    if(valid){
+                   else{
                         this.setState({
                             userName: "",
                             password: "",
@@ -60,6 +57,7 @@ class SignUp extends Component {
                         })
                     }
                 }) 
+               
                 $("#userName").focus();
             }
             
