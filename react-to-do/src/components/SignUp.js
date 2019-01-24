@@ -71,11 +71,14 @@ class SignUp extends Component {
     {
         let { userName, password, email } = this.state
         let valid = true
+        const spaceRegex = RegExp(/\s/)
         const passwordRegex = RegExp(/^.{4,8}$/)
         const emailRegex = RegExp(
             /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
             );
         let userErrorMessage = userName.trim().length >= 4 ? "": "userName has to be at least 4 characters"
+        if(userErrorMessage === "")
+            userErrorMessage = spaceRegex.test(userName) ? "username cannot have whitespaces" : ""
         let passwordErrorMessage = passwordRegex.test(password) ? "": "password has to be between 4 and 8 characters" 
         let emailErrorMessage = emailRegex.test(email) ? "" : "Invalid Email address"
           
