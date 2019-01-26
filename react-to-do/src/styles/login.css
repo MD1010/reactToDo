@@ -1,8 +1,7 @@
 body{
-    background: black;
+     /* background: black; */
     overflow-x: hidden; 
-    overflow-y: hidden;
-    /* min-width:637px; */
+    overflow-y: hidden; 
 }
 
 ::-webkit-input-placeholder 
@@ -80,7 +79,7 @@ td{
     cursor: pointer;
 }
 
-.signUpForm
+.Form
 {
     display: block;
     border: 1px solid;

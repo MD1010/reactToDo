@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { postData } from '../helpers/utils'
-import { usersURL } from '../helpers/consts'
-import '../styles/login.css'
+import { postData } from '../../helpers/utils'
+import { usersURL } from '../../helpers/consts'
+import '../../styles/login.css'
 import $ from 'jquery'
 
 class SignUp extends Component {
@@ -108,7 +108,7 @@ class SignUp extends Component {
     render() {
         let { formErrors } = this.state
         return (
-            <div className="signUpForm">
+            <div className="Form">
                 <div className="title">
                     Sign Up
                 </div>
