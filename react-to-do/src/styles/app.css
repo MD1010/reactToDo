@@ -1,3 +1,5 @@
-/* html{
-    color: white
-} */
+html{
+    background-repeat: no-repeat;
+    background-size:100%; 
+    background-image: url("../img/background.jpg");
+}

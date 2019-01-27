@@ -29,39 +29,12 @@ class SignIn extends Component {
     render() {
         let { formErrors } = this.state
         return (
-            <div className="Form">
-                <div className="title">
-                    Sign In
-                </div>
-                
+            <div className="form">
+                <div className="title">Sign In</div>                
                 <form onSubmit={this.submitForm}>
-                    <table className="fields">
-                        <tbody>
-                            <tr className="username field">
-                                <td>
-                                    <input spellCheck="false" autoComplete="off" className="input-bar" placeholder="username" type="text" id="userName" value={this.state.userName} onChange={this.handleChange} maxLength="13"></input>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr className="password field"> 
-                                <td>
-                                    <input spellCheck="false" autoComplete="off" className="input-bar" placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
-                                </td>
-
-                            </tr>
-                        </tbody> 
-                        <tbody>
-                            <tr> 
-                                <td>
-                                    <button type="submit" id="submit-button" >Sign In</button>
-                                </td>
-                            </tr>
-                        </tbody> 
-                    </table>   
-                     
-                  
-                    
+                    <input className="username field" spellCheck="false" autoComplete="off" className="input-bar" placeholder="username" type="text" id="userName" value={this.state.userName} onChange={this.handleChange} maxLength="13"></input>
+                    <input className="password field" spellCheck="false" autoComplete="off" className="input-bar" placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
+                    <button type="submit" id="submit-button" >Login</button>     
                 </form>
             </div>
 

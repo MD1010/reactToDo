@@ -109,56 +109,20 @@ class SignUp extends Component {
         let { formErrors } = this.state
         return (
             <div className="Form">
-                <div className="title">
-                    Sign Up
-                </div>
-                
                 <form onSubmit={this.submitForm}>
-                    <table className="fields">
-                        <tbody>
-                            <tr className="username field">
-                                <td>
-                                    <input spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="username" type="text" id="userName" value={this.state.userName} onChange={this.handleChange} maxLength="13"></input>
-                                </td>
-                                <td>
-                                    <label className="error-label">{formErrors.userName}</label>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr className="email field">
-                                <td>
-                                    <input spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange}></input>                            
-                                </td>
-                                <td>
-                                    <label className="error-label">{formErrors.email}</label>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr className="password field"> 
-                                <td>
-                                    <input spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
-                                </td>
-                                <td>
-                                    <label className="error-label">{formErrors.password}</label>
-                                </td>
-                            </tr>
-                        </tbody> 
-                        <tbody>
-                            <tr> 
-                                <td>
-                                    <button type="submit" id="submit-button" >Create Account</button>
-                                </td>
-                            </tr>
-                        </tbody> 
-                    </table>   
-                     
-                  
+                    <div className="title">Sign Up</div>
+                    <input className="username field" spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="username" type="text" id="userName" value={this.state.userName} onChange={this.handleChange} maxLength="13"></input>
+                    <label className="error-label">{formErrors.userName}</label>  
                     
+                    <input className="email field" spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange}></input>                            
+                    <label className="error-label">{formErrors.email}</label>
+                    
+                    <input className="password field" spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
+                    <label className="error-label">{formErrors.password}</label>
+                    
+                    <button type="submit" id="submit-button" >Create Account</button>     
                 </form>
             </div>
-
         )
     }
 }

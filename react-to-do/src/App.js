@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-// import '../src/styles/app.css'
+import '../../react-to-do/src/styles/app.css'
 import Navbar from './Layout/Navbar';
 import SignUp from './components/Authentication/SignUp'
 import SignIn from './components/Authentication/SignIn';
