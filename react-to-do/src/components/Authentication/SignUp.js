@@ -108,21 +108,19 @@ class SignUp extends Component {
     render() {
         let { formErrors } = this.state
         return (
-            <div className="Form">
-                <form onSubmit={this.submitForm}>
-                    <div className="title">Sign Up</div>
-                    <input className="username field" spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="username" type="text" id="userName" value={this.state.userName} onChange={this.handleChange} maxLength="13"></input>
-                    <label className="error-label">{formErrors.userName}</label>  
-                    
-                    <input className="email field" spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange}></input>                            
-                    <label className="error-label">{formErrors.email}</label>
-                    
-                    <input className="password field" spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
-                    <label className="error-label">{formErrors.password}</label>
-                    
-                    <button type="submit" id="submit-button" >Create Account</button>     
-                </form>
-            </div>
+            <form onSubmit={this.submitForm}>
+                <div className="title">Sign Up</div>
+                <input className="username field" spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="username" type="text" id="userName" value={this.state.userName} onChange={this.handleChange} maxLength="13"></input>
+                <label className="error-label">{formErrors.userName}</label>  
+                
+                <input className="email field" spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange}></input>                            
+                <label className="error-label">{formErrors.email}</label>
+                
+                <input className="password field" spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
+                <label className="error-label">{formErrors.password}</label>
+                
+                <button type="submit" id="submit-button" >Create Account</button>     
+            </form>
         )
     }
 }

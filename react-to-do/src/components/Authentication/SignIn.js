@@ -18,7 +18,7 @@ class SignIn extends Component {
     }
     
     submitForm = (event) => {
-        
+        event.preventDefault()
     }
       
     handleChange = (event) => {
@@ -29,15 +29,12 @@ class SignIn extends Component {
     render() {
         let { formErrors } = this.state
         return (
-            <div className="form">
-                <div className="title">Sign In</div>                
-                <form onSubmit={this.submitForm}>
-                    <input className="username field" spellCheck="false" autoComplete="off" className="input-bar" placeholder="username" type="text" id="userName" value={this.state.userName} onChange={this.handleChange} maxLength="13"></input>
-                    <input className="password field" spellCheck="false" autoComplete="off" className="input-bar" placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
-                    <button type="submit" id="submit-button" >Login</button>     
-                </form>
-            </div>
-
+            <form onSubmit={this.submitForm}>
+            <div className="title">Sign In</div>                
+                <input className="username field" spellCheck="false" autoComplete="off" className="input-bar" placeholder="username" type="text" id="userName" value={this.state.userName} onChange={this.handleChange} maxLength="13"></input>
+                <input className="password field" spellCheck="false" autoComplete="off" className="input-bar" placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
+                <button type="submit" id="submit-button" >Login</button>     
+            </form>
         )
     }
 }
