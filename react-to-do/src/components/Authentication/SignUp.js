@@ -108,7 +108,7 @@ class SignUp extends Component {
     render() {
         let { formErrors } = this.state
         return (
-            <form onSubmit={this.submitForm}>
+            <form className="form" onSubmit={this.submitForm}>
                 <div className="title">Sign Up</div>
                 <input className="username field" spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"} placeholder="username" type="text" id="userName" value={this.state.userName} onChange={this.handleChange} maxLength="13"></input>
                 <label className="error-label">{formErrors.userName}</label>  
