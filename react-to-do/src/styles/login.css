@@ -12,7 +12,7 @@ body{
 
 .error-label
 {
-    color:red;
+    color:#750909;
     font-weight: bold;
 }
 .form{
@@ -20,12 +20,11 @@ body{
     /* display: block; */
     background: rgb(126, 112, 112);
     box-shadow: 5px 5px 5px 1px;
-    padding: 60px;
+    padding: 50px;
     opacity: 0.5;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-right: -50%;
     transform: translate(-50%, -50%) 
 }
 

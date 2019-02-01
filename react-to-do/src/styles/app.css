@@ -2,4 +2,5 @@ html{
     background-repeat: no-repeat;
     background-image: url("../img/background.jpg");
     background-size: cover;
+    background-attachment: fixed;
 }
