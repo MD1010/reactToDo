@@ -20,8 +20,9 @@ body{
 }
 .form{
     width: 40%;
-    box-shadow: 5px 5px 5px 0px;
     padding: 50px;
+    /* margin-top:40px; */
+    /* margin-bottom: 40px; */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -34,7 +35,7 @@ body{
 .transparent-bg{
     width: 40%;
     background: black;
-    box-shadow: 15px 10px 15px 0px; 
+    box-shadow: 2px 2px 2px 2px; 
     opacity: 0.4;
     display: table-cell;
     position: absolute;
