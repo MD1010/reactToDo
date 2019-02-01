@@ -25,7 +25,7 @@ body{
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) ;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     border-radius: 40px;
@@ -48,6 +48,7 @@ body{
 .bgForm{
     display: table;
 }
+
 div.title{
     margin-bottom: 20px;
     color: white;
@@ -65,8 +66,8 @@ input{
     width: 80% !important;
     align-self: center;
     margin: 9px !important;
+    border-bottom: transparent !important;
 }
-
 
 #submit-button{
     margin-top: 30px;
@@ -83,28 +84,22 @@ input{
 #submit-button:hover{
     background-color: white;
     color: black;
-
-
+    cursor: pointer;
 }
 
 
 
-input:not([type]):focus:not([readonly]), 
 input[type=text]:not(.browser-default):focus:not([readonly]),
 input[type=password]:not(.browser-default):focus:not([readonly]), 
-input[type=email]:not(.browser-default):focus:not([readonly]), 
-input[type=url]:not(.browser-default):focus:not([readonly]), 
-input[type=time]:not(.browser-default):focus:not([readonly]), 
-input[type=date]:not(.browser-default):focus:not([readonly]), 
-input[type=datetime]:not(.browser-default):focus:not([readonly]), 
-input[type=datetime-local]:not(.browser-default):focus:not([readonly]), 
-input[type=tel]:not(.browser-default):focus:not([readonly]), 
-input[type=number]:not(.browser-default):focus:not([readonly]), 
-input[type=search]:not(.browser-default):focus:not([readonly]), 
-textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom: white !important;
-    -webkit-box-shadow: white !important; 
-     box-shadow: white !important;
+input[type=email]:not(.browser-default):focus:not([readonly]){
+border-bottom: 1px solid;  
+-webkit-box-shadow: 0 1px 0 0; 
+box-shadow: 0 1px 0 0
 }
-    
 
+
+.error{
+   border: 1px solid red !important;
+   -webkit-box-shadow: 0 1px 0 0 red !important; 
+    box-shadow: 0 1px 0 0 red !important;
+}
