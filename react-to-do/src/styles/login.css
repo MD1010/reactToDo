@@ -1,39 +1,110 @@
 body{
      /* background: black; */
     overflow-x: hidden; 
-    overflow-y: hidden; 
+    overflow-y: hidden;
+    box-shadow: 100px 0px 100px 100px;
 }
 
 ::-webkit-input-placeholder 
 {
     text-align: center;
-    color:white;
+    color:rgb(255, 255, 255,0.25) !important;
+    font-weight: 300;
 }
 
 .error-label
 {
-    color:#750909;
-    font-weight: bold;
+    color:red !important;
+    font-weight: 600;
+    align-self: center;
 }
 .form{
-    width: 50%;
-    /* display: block; */
-    background: rgb(126, 112, 112);
-    box-shadow: 5px 5px 5px 1px;
+    width: 40%;
+    box-shadow: 5px 5px 5px 0px;
     padding: 50px;
-    opacity: 0.5;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) 
+    transform: translate(-50%, -50%) ;
+    display: flex;
+    flex-direction: column;
+    border-radius: 40px;
 }
 
+.transparent-bg{
+    width: 40%;
+    background: black;
+    box-shadow: 15px 10px 15px 0px; 
+    opacity: 0.4;
+    display: table-cell;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) ;
+    border-radius: 40px;
+    height: 50%;
+}
+
+.bgForm{
+    display: table;
+}
 div.title{
-    /* margin-bottom: 20px; */
-    color: white; 
+    margin-bottom: 20px;
+    color: white;
+    font-size: 35px;
+    align-self: center;
+    text-decoration: overline;
       
 }
 
-#submit-button{
-   margin-top:10px;
+input{
+    text-align: center;
+    color: white;
+    background-color: rgb(255, 255, 255,0.05) !important;
+    border-radius: 50px !important;
+    width: 80% !important;
+    align-self: center;
+    margin: 9px !important;
 }
+
+
+#submit-button{
+    margin-top: 30px;
+    align-content: center;
+    width: 80%;
+    align-self: center;
+    border-radius: inherit;
+    background-color: unset;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+}
+
+#submit-button:hover{
+    background-color: white;
+    color: black;
+
+
+}
+
+
+
+input:not([type]):focus:not([readonly]), 
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]), 
+input[type=email]:not(.browser-default):focus:not([readonly]), 
+input[type=url]:not(.browser-default):focus:not([readonly]), 
+input[type=time]:not(.browser-default):focus:not([readonly]), 
+input[type=date]:not(.browser-default):focus:not([readonly]), 
+input[type=datetime]:not(.browser-default):focus:not([readonly]), 
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]), 
+input[type=tel]:not(.browser-default):focus:not([readonly]), 
+input[type=number]:not(.browser-default):focus:not([readonly]), 
+input[type=search]:not(.browser-default):focus:not([readonly]), 
+textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: white !important;
+    -webkit-box-shadow: white !important; 
+     box-shadow: white !important;
+}
+    
+
