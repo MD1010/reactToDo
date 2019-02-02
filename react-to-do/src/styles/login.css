@@ -43,7 +43,7 @@ body{
 }
 
 .transparent-bg.sign-up{
-    height: 540px;
+    height: 600px;
 }
 .transparent-bg.sign-in{
     height: 380px;
@@ -63,12 +63,14 @@ div.title{
 
 .fullName
 {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
-    width: 81%;
-    /* align-self: center; */
+    width: 80%;
 }
 
+.firstNameDiv, .lastNameDiv{
+    width: 50%;
+}
 input{
     text-align: center;
     color: white;

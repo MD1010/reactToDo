@@ -26,7 +26,7 @@ class SignUp extends Component {
         }
     }
     componentDidMount(){
-        $("#userName").focus();
+        $("#firstName").focus();
     }
     
     submitForm = (event) => {
@@ -66,7 +66,7 @@ class SignUp extends Component {
                     }
                 }) 
                
-                $("#userName").focus();
+                $("#firstName").focus();
             }
             
             else
@@ -77,33 +77,43 @@ class SignUp extends Component {
    
     validateFormFields = async () => 
     {
-        let { userName, password, email, retypedPassword } = this.state
+        let { userName, firstName, lastName, password, email, retypedPassword } = this.state
         let valid = true
+        let firstNameErrorMessage = firstName.trim() ? "" : "required field"
+        let lastNameErrorMessage = lastName.trim() ? "" : "required field"
+        let userErrorMessage = userName.trim() ? "" : "required field"
+        let passwordErrorMessage = password.trim() ? "" : "required field"
+        let emailErrorMessage = email.trim() ? "" : "required field"
+        let retypedPasswordMessage = retypedPassword.trim() ? "" : "required field"
         const spaceRegex = RegExp(/\s/)
         const passwordRegex = RegExp(/^.{4,8}$/)
         const emailRegex = RegExp(
-            /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-            );
-            let userErrorMessage = userName.trim().length >= 4 ? "": "userName has to be at least 4 characters"
-            if(userErrorMessage === "")
-            userErrorMessage = spaceRegex.test(userName) ? "username cannot have whitespaces" : ""
-            let passwordErrorMessage = passwordRegex.test(password) ? "": "password has to be between 4 and 8 characters" 
-            let emailErrorMessage = emailRegex.test(email) ? "" : "Invalid Email address"
-            let retypedPasswordMessage = ""
-            if(passwordErrorMessage.length === 0 && retypedPassword) {
-                retypedPasswordMessage = password == retypedPassword ? "" : "passwords don't match"
-            }  
-            await this.setState({
-            formErrors : {
-                userName : userErrorMessage,
-                email : emailErrorMessage,
-                password : passwordErrorMessage,
-                retypedPassword : retypedPasswordMessage
-            }
+        /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+        );
+        if(userErrorMessage === "")
+        userErrorMessage = userName.trim().length >= 4 ? "": "userName has to be at least 4 characters"
+        if(userErrorMessage === "")
+        userErrorMessage = spaceRegex.test(userName) ? "username cannot have whitespaces" : ""
+        if(passwordErrorMessage === "")
+        passwordErrorMessage = passwordRegex.test(password) ? "": "password has to be between 4 and 8 characters" 
+        if(emailErrorMessage === "")
+        emailErrorMessage = emailRegex.test(email) ? "" : "Invalid Email address"
+        if(passwordErrorMessage.length === 0 && retypedPassword) {
+            retypedPasswordMessage = password == retypedPassword ? "" : "passwords don't match"
+        }  
+        await this.setState({
+        formErrors : {
+            firstName : firstNameErrorMessage,
+            lastName : lastNameErrorMessage,
+            userName : userErrorMessage,
+            email : emailErrorMessage,
+            password : passwordErrorMessage,
+            retypedPassword : retypedPasswordMessage
+        }
         })
 
-         Object.values(this.state.formErrors).forEach(field => {
-            field.length > 0 && (valid = false)
+        Object.values(this.state.formErrors).forEach(field => {
+        field.length > 0 && (valid = false)
         }); 
 
         return valid
@@ -126,10 +136,16 @@ class SignUp extends Component {
                     <div className="title">Sign Up</div>
 
                     <div className="fullName">
-                        <input className="firstName field" spellCheck="false" autoComplete="off" placeholder="firstName" type="text" id="firstName" value={this.state.firstName} onChange={this.handleChange} maxLength="13"></input>
-                        <input className="lastName field" spellCheck="false" autoComplete="off"  placeholder="lastName" type="text" id="lastName" value={this.state.lastName} onChange={this.handleChange} maxLength="13"></input>
+                        <div className="firstNameDiv">
+                            <input className="firstName field" spellCheck="false" autoComplete="off" id="firstName" className={formErrors.userName.length > 0 ? "error" : "input-bar"}  placeholder="first name" type="text" id="firstName" value={this.state.firstName} onChange={this.handleChange} maxLength="13"></input>
+                            <label className="error-label">{formErrors.firstName}</label>  
+                        </div>
+                        <div className="lastNameDiv">
+                            <input className="lastName field" spellCheck="false" autoComplete="off" id="lastName" className={formErrors.userName.length > 0 ? "error" : "input-bar"}  placeholder="last name" type="text" id="lastName" value={this.state.lastName} onChange={this.handleChange} maxLength="13"></input>
+                            <label className="error-label">{formErrors.lastName}</label>  
+                        </div>
                     </div>
-                    
+
                     <input className="username field" spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"}  placeholder="username" type="text" id="userName" value={this.state.userName} onChange={this.handleChange} maxLength="13"></input>
                     <label className="error-label">{formErrors.userName}</label>  
                     
