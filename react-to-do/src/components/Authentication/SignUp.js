@@ -109,7 +109,7 @@ class SignUp extends Component {
         let { formErrors } = this.state
         return (
             <div className="bgForm">
-                <div className="transparent-bg"></div>
+                <div className="transparent-bg sign-up"></div>
                 <form className="form" onSubmit={this.submitForm}>
                     <div className="title">Sign Up</div>
                     <input className="username field" spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"}  placeholder="username" type="text" id="userName" value={this.state.userName} onChange={this.handleChange} maxLength="13"></input>
