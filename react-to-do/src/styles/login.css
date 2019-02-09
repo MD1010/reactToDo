@@ -1,7 +1,7 @@
 body{
-     /* background: black; */
-    /* overflow-x: hidden; 
-    overflow-y: hidden; */
+     /* background: black;  */
+    overflow-x: hidden; 
+    overflow-y: hidden; 
     box-shadow: 100px 0px 100px 100px;
 }
 
@@ -16,6 +16,7 @@ body{
 {
     color:red !important;
     font-weight: 600;
+    align-self: center;
 }
 .form{
     width: 40%;
@@ -27,7 +28,7 @@ body{
     display: flex;
     flex-direction: column;
     border-radius: 40px;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .transparent-bg{
@@ -43,7 +44,7 @@ body{
 }
 
 .transparent-bg.sign-up{
-    height: 600px;
+    height: 700px;
 }
 .transparent-bg.sign-in{
     height: 380px;
@@ -58,7 +59,7 @@ div.title{
     color: white;
     font-size: 35px;
     text-decoration: overline;
-      
+    align-self: center;
 }
 
 .fullName
@@ -77,7 +78,7 @@ input{
     background-color: rgb(255, 255, 255,0.05) !important;
     border-radius: 50px !important;
     width: 80% !important;
-    /* align-self: center; */
+    align-self: center;
     margin: 9px !important;
     border-bottom: transparent !important;
 }
@@ -86,7 +87,7 @@ input{
     margin-top: 30px;
     align-content: center;
     width: 80%;
-    /* align-self: center; */
+    align-self: center;
     border-radius: inherit;
     background-color: unset;
     color: white;
@@ -99,8 +100,6 @@ input{
     color: black;
     cursor: pointer;
 }
-
-
 
 input[type=text]:not(.browser-default):focus:not([readonly]),
 input[type=password]:not(.browser-default):focus:not([readonly]), 

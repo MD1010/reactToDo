@@ -135,16 +135,10 @@ class SignUp extends Component {
                 <form className="form" onSubmit={this.submitForm}>
                     <div className="title">Sign Up</div>
 
-                    <div className="fullName">
-                        <div className="firstNameDiv">
                             <input className="firstName field" spellCheck="false" autoComplete="off" id="firstName" className={formErrors.userName.length > 0 ? "error" : "input-bar"}  placeholder="first name" type="text" id="firstName" value={this.state.firstName} onChange={this.handleChange} maxLength="13"></input>
                             <label className="error-label">{formErrors.firstName}</label>  
-                        </div>
-                        <div className="lastNameDiv">
                             <input className="lastName field" spellCheck="false" autoComplete="off" id="lastName" className={formErrors.userName.length > 0 ? "error" : "input-bar"}  placeholder="last name" type="text" id="lastName" value={this.state.lastName} onChange={this.handleChange} maxLength="13"></input>
                             <label className="error-label">{formErrors.lastName}</label>  
-                        </div>
-                    </div>
 
                     <input className="username field" spellCheck="false" autoComplete="off" className={formErrors.userName.length > 0 ? "error" : "input-bar"}  placeholder="username" type="text" id="userName" value={this.state.userName} onChange={this.handleChange} maxLength="13"></input>
                     <label className="error-label">{formErrors.userName}</label>  
