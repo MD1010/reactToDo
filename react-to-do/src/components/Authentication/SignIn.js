@@ -30,15 +30,17 @@ class SignIn extends Component {
         let { formErrors } = this.state
         return (
             <div className="bgForm">
-                <div className="transparent-bg sign-in"></div>
+                {/* <div className="transparent-bg sign-in"></div> */}
                 <form className="form" onSubmit={this.submitForm}>
                     <div className="title">Sign In</div>
                     
                     <div className="field">
+                        <i class="material-icons icon ">email</i>  
                         <input className="email field" id="email" spellCheck="false" autoComplete="off" placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange} maxLength="40"></input>                            
                     </div>
                     <div className="field">
-                        <input className="password field" spellCheck="false" autoComplete="off" placeholder="password" type="text" id="password" value={this.state.password} onChange={this.handleChange} maxLength="40"></input>
+                        <i class="material-icons icon ">lock</i>  
+                        <input className="password field" spellCheck="false" autoComplete="off" placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="40"></input>
                     </div>
                    
                     <button type="submit" id="submit-button" >Sign In</button>     

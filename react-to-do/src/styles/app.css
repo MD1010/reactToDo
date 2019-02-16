@@ -2,6 +2,7 @@ body{
     background-repeat: no-repeat;
     background-image: url("../img/background.jpg");
     background-size: cover;
+    z-index: -1;
     background-position: center;
     background-attachment: fixed;
     padding: 0;

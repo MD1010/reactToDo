@@ -17,14 +17,23 @@ body{
 }
 
 .field{
-    display: inline-flex;
+    display: flex;
     width:100%;
-    margin-left:8%;
+    margin-left:5%;
 }
 
 .field .error-label{
-    align-self: center;
+    /* display: inline-flex; */
 }
+
+.labelField{
+    display: flex;
+    flex-direction: row;
+    /* width:200%; */
+    margin:0;
+    padding:0;
+}
+
 
 input{
     text-align: center !important;
@@ -34,22 +43,32 @@ input{
     width: 80% !important;
     margin: 9px !important;
     border-bottom: transparent !important;
-    text-align: center;
+    padding: 40px;
+    
+    /* padding-left:50%; */
 
+}
+
+.icon{
+    color: #aaa;
+    position: relative;
+    left: 50px;
+    align-self: center;
+    /* padding-right:50px; */
 }
 
 .bgForm{
     position: relative;
-    top: 10%;
+    top: 50%;
     left:50%;
-    transform: translate(-50%);
+    transform: translate(-50%,-45%);
     bottom: 5%;
     width: 50%;
     text-align: center;
 }
 
-.transparent-bg{
-    position: absolute;
+/* .transparent-bg{
+    position: relative;
     top: 0;
     left: 50%;
     -webkit-transform: translate(-50%);
@@ -61,7 +80,8 @@ input{
     text-align: center;
     border-radius: 50px;
     z-index: -1;
-}
+} */
+
 .form{
     border-radius: 40px;
     padding-bottom:15%;
@@ -69,15 +89,17 @@ input{
 ::-webkit-input-placeholder 
 {
     text-align: center;
-    color:rgb(255, 255, 255,0.25) !important;
+    /* padding-left: 60px !important;  */
+    color:rgb(255, 255, 255,0.45) !important;
     font-weight: 300;
+    margin-left:20% !important;
 }
 
 .error-label
 {
     color:red !important;
     font-weight: 600;
-
+    align-self: center;
 }
 
 div.title{
@@ -87,16 +109,12 @@ div.title{
     color: white;
     font-size: 35px;
     text-decoration: overline;
-    text-align: center; 
-    /* align-self: center !important; */
 }
 
 
 #submit-button{
     margin-top: 30px;
-    align-content: center;
     width: 80%;
-    align-self: center !important;
     border-radius: inherit;
     background-color: unset;
     color: white;
@@ -113,7 +131,7 @@ div.title{
 input[type=text]:not(.browser-default):focus:not([readonly]),
 input[type=password]:not(.browser-default):focus:not([readonly]), 
 input[type=email]:not(.browser-default):focus:not([readonly]){
-border-bottom: 1px solid;  
+border-bottom: 1px solid ;  
 -webkit-box-shadow: 0 1px 0 0; 
 box-shadow: 0 1px 0 0
 }
