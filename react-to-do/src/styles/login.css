@@ -1,10 +1,71 @@
 body{
-     /* background: black;  */
     overflow-x: hidden; 
     overflow-y: hidden; 
     box-shadow: 100px 0px 100px 100px;
 }
 
+.App{
+    position: absolute;  
+    height: 100%;
+    width:100%;
+}
+
+.navBar{
+    position: relative; 
+    height: fit-content;
+    width:100%;
+}
+
+.field{
+    display: inline-flex;
+    width:100%;
+    margin-left:8%;
+}
+
+.field .error-label{
+    align-self: center;
+}
+
+input{
+    text-align: center !important;
+    color: white;
+    background-color: rgb(255, 255, 255,0.05) !important;
+    border-radius: 50px !important;
+    width: 80% !important;
+    margin: 9px !important;
+    border-bottom: transparent !important;
+    text-align: center;
+
+}
+
+.bgForm{
+    position: relative;
+    top: 10%;
+    left:50%;
+    transform: translate(-50%);
+    bottom: 5%;
+    width: 50%;
+    text-align: center;
+}
+
+.transparent-bg{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    -webkit-transform: translate(-50%);
+    transform: translate(-50%);
+    background: black;
+    opacity: 0.4;
+    bottom: 15%;
+    width: 115%;
+    text-align: center;
+    border-radius: 50px;
+    z-index: -1;
+}
+.form{
+    border-radius: 40px;
+    padding-bottom:15%;
+}
 ::-webkit-input-placeholder 
 {
     text-align: center;
@@ -16,78 +77,26 @@ body{
 {
     color:red !important;
     font-weight: 600;
-    align-self: center;
-}
-.form{
-    width: 40%;
-    padding: 50px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    border-radius: 40px;
-    /* align-items: center; */
-}
 
-.transparent-bg{
-    width: 35%;
-    background: black;
-    box-shadow: 2px 2px 2px 2px; 
-    opacity: 0.4;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) ;
-    border-radius: 40px;
-}
-
-.transparent-bg.sign-up{
-    height: 700px;
-}
-.transparent-bg.sign-in{
-    height: 380px;
-}
-
-.bgForm{
-    display: table;
 }
 
 div.title{
-    margin-bottom: 20px;
+    padding:5px;
+    margin-bottom: 10px;
+    margin-top: 30px;
     color: white;
     font-size: 35px;
     text-decoration: overline;
-    align-self: center;
+    text-align: center; 
+    /* align-self: center !important; */
 }
 
-.fullName
-{
-    display: inline-flex;
-    flex-direction: row;
-    width: 80%;
-}
-
-.firstNameDiv, .lastNameDiv{
-    width: 50%;
-}
-input{
-    text-align: center;
-    color: white;
-    background-color: rgb(255, 255, 255,0.05) !important;
-    border-radius: 50px !important;
-    width: 80% !important;
-    align-self: center;
-    margin: 9px !important;
-    border-bottom: transparent !important;
-}
 
 #submit-button{
     margin-top: 30px;
     align-content: center;
     width: 80%;
-    align-self: center;
+    align-self: center !important;
     border-radius: inherit;
     background-color: unset;
     color: white;
@@ -115,14 +124,3 @@ box-shadow: 0 1px 0 0
    -webkit-box-shadow: 0 1px 0 0 red !important; 
     box-shadow: 0 1px 0 0 red !important;
 }
-
-
-@media only screen and (max-width: 850px) {
-    .form{
-        width: fit-content;
-    } 
-    .transparent-bg
-    {
-        width: 70%;
-    }
-  }

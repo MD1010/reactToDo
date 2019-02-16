@@ -11,15 +11,19 @@ class App extends Component
     return(
       <BrowserRouter>
         <div className="App">
-          <Navbar/>
-          <Switch>
-              <Route path='/SignIn' component={SignIn} />
-              <Route path='/SignUp' component={SignUp} />
-              <Redirect from="/" to="/SignIn"/>
+          <div className="navBar">
+            <Navbar/>
+          </div>
+            <Switch>
+                <Route path='/SignIn' component={SignIn} />
+                <Route path='/SignUp' component={SignUp} />
+                <Redirect from="/" to="/SignIn"/>
 
-              /*all components are mapped to / therfore they are all pointing to signIn */
-          </Switch>
-        </div> 
+            </Switch>
+        
+         </div>
+         
+        {/* all components are mapped to / therfore they are all pointing to signIn  */}
       </BrowserRouter>
     )
   }
