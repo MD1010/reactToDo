@@ -127,38 +127,38 @@ class SignUp extends Component {
         return (
             <div className="bgForm">
                 {/* <div className="transparent-bg sign-up"></div> */}
-                <form className="form" onSubmit={this.submitForm}>
                     <div className="title">Sign Up</div>
+                <form className="form" onSubmit={this.submitForm}>
                         <div className="field">
-                            <i class="material-icons icon ">person</i>                         
+                            {/* <i className="material-icons icon ">person</i>                          */}
                             <input className="firstName field" spellCheck="false" autoComplete="off" id="firstName" className={formErrors.firstName.length > 0 ? "error" : "input-bar"}  placeholder="first name" type="text" id="firstName" value={this.state.firstName} onChange={this.handleChange} maxLength="13"></input>
                             <label className="error-label">{formErrors.firstName}</label>  
                         </div>
                     
                     <div className="field">
-                        <i class="material-icons icon ">person</i>  
+                        {/* <i className="material-icons icon ">person</i>   */}
                         <input className="lastName field" spellCheck="false" autoComplete="off" id="lastName" className={formErrors.lastName.length > 0 ? "error" : "input-bar"}  placeholder="last name" type="text" id="lastName" value={this.state.lastName} onChange={this.handleChange} maxLength="13"></input>
                         <label className="error-label">{formErrors.lastName}</label>  
                     </div>
                    
                     <div className="field">
-                        <i class="material-icons icon ">email</i> 
+                        {/* <i className="material-icons icon ">email</i>  */}
                         <input className="email field" spellCheck="false" autoComplete="off" className={formErrors.email.length > 0 ? "error" : "input-bar"} placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange} maxLength="40"></input>                            
                         <label className="error-label">{formErrors.email}</label>
                     </div>
                     <div className="field">
-                        <i class="material-icons icon ">lock</i> 
+                        {/* <i className="material-icons icon ">lock</i>  */}
                         <input className="password field" spellCheck="false" autoComplete="off" className={formErrors.password.length > 0 ? "error" : "input-bar"} placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
                         <label className="error-label">{formErrors.password}</label>
                     </div>
                     <div className="field">
-                        <i class="material-icons icon ">keyboard</i> 
+                        {/* <i className="material-icons icon ">keyboard</i>  */}
                         <input className="retypedPassword field" spellCheck="false" autoComplete="off" className={formErrors.retypedPassword.length > 0 ? "error" : "input-bar"} placeholder="retype password" type="password" id="retypedPassword" value={this.state.retypedPassword} onChange={this.handleChange} maxLength="13"></input>
                         <label className="error-label">{formErrors.retypedPassword}</label>
                     </div>
-                    
                     <button type="submit" id="submit-button" >Create Account</button>     
                 </form>
+                    
              </div>
             
             

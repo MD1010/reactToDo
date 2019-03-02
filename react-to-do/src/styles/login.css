@@ -16,15 +16,6 @@ body{
     width:100%;
 }
 
-.field{
-    display: flex;
-    width:100%;
-    margin-left:5%;
-}
-
-.field .error-label{
-    /* display: inline-flex; */
-}
 
 .labelField{
     display: flex;
@@ -41,7 +32,7 @@ input{
     background-color: rgb(255, 255, 255,0.05) !important;
     border-radius: 50px !important;
     width: 80% !important;
-    margin: 9px !important;
+    margin-top: 9px !important;
     border-bottom: transparent !important;
     padding: 40px;
     
@@ -59,9 +50,9 @@ input{
 
 .bgForm{
     position: relative;
-    top: 50%;
+    top: 45%;
     left:50%;
-    transform: translate(-50%,-45%);
+    transform: translate(-50%,-50%);
     bottom: 5%;
     width: 50%;
     text-align: center;
@@ -82,10 +73,7 @@ input{
     z-index: -1;
 } */
 
-.form{
-    border-radius: 40px;
-    padding-bottom:15%;
-}
+
 ::-webkit-input-placeholder 
 {
     text-align: center;
@@ -120,6 +108,8 @@ div.title{
     color: white;
     font-weight: bold;
     padding: 10px;
+    border-radius: 40px;
+
 }
 
 #submit-button:hover{
