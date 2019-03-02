@@ -1,0 +1,118 @@
+.deleteIcon ,.editIcon
+{
+    cursor: pointer;
+}
+
+.list
+{
+    border: 0.2px solid;
+    margin: 7px;
+    padding: 5px;
+    background: linear-gradient(to right,#5260e6,#26c6ce,#24dbdd,#37b9e9,#35bce7,#5260e6);
+}
+
+.title   
+{
+    font-weight: bold;
+    font-size: 32px;
+}
+.collection-item
+{
+    border: 0 solid;
+    display: flex;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0px;
+}
+ .collection-item .mission-text 
+{
+    width:85%;
+    overflow: hidden;
+    white-space: initial;
+}
+
+body
+{
+    margin: 45px;   
+}
+
+.swal-button--confirm{
+    padding: 7px 19px;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    font-size: 12px;
+    position: relative;
+    align-content: center;
+    border: 1px solid green;
+  }
+
+  .swal-button--cancel{
+    padding: 7px 19px;
+    border-radius: 4px;
+    background-color:white;
+    font-size: 12px;
+    position: relative;
+    align-content: center;
+    color: black;
+    border: 1px solid red;
+    margin-left:20px;
+  }
+
+  .swal-button--cancel:hover{
+   background-color: red;
+   color: white;
+  }
+
+  .swal-button--confirm:hover{
+    background-color: green;
+    color: white;
+  }
+
+  .swal-content__input:focus
+  {
+    border-color: black;
+  }
+
+  .btn
+  {
+      margin: 15px;
+      border-radius: 25px;
+  }
+
+  .btn:hover
+  {
+      cursor: pointer;
+  }
+
+  .forwards:hover
+  {
+      cursor: pointer;
+  }
+
+  .backwards:hover
+  {
+      cursor: pointer;
+  }
+
+.spinner:empty
+{
+    position: absolute;
+    top: calc(50% - 4em);
+    left: calc(50% - 4em);
+    width: 7em;
+    height: 7em;
+    border: 1.1em solid rgba(8, 70, 16, 0.2);
+    border-left: 1.1em solid #228db8;
+    border-radius: 50%;
+    animation: loader 1.1s infinite linear;
+}
+    
+@keyframes loader 
+{
+    100% 
+    {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,17 @@
+/* nav .brand-logo {
+    margin-left: 10%;
+} */
+nav{
+    font-weight: bold;
+    background-image:url("../img/navbar.jpg");
+}
+a:not(.btn-floating):hover{
+color:rgb(233, 30, 99); 
+opacity: 1;   
+}
+
+@media only screen and (max-width: 450px) {
+    nav{
+        width: max-content;
+    }
+  }

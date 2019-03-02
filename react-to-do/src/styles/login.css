@@ -1,0 +1,132 @@
+body{
+    overflow-x: hidden; 
+    overflow-y: hidden; 
+    box-shadow: 100px 0px 100px 100px;
+}
+
+.App{
+    position: absolute;  
+    height: 100%;
+    width:100%;
+}
+
+.navBar{
+    position: relative; 
+    height: fit-content;
+    width:100%;
+}
+
+input{
+    text-align: center !important;
+    color: white;
+    background-color: rgb(255, 255, 255,0.05) !important;
+    border-radius: 50px !important;
+    width: 80% !important;
+    margin-top: 9px !important;
+    border-bottom: transparent !important;
+    padding: 40px;
+    
+    /* padding-left:50%; */
+
+}
+
+.icon{
+    color: #aaa;
+    position: relative;
+    left: 50px;
+    align-self: center;
+    /* padding-right:50px; */
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bgForm{
+    position: relative;
+    top: 45%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    bottom: 5%;
+    width: 50%;
+}
+
+
+/* .transparent-bg{
+    position: relative;
+    top: 0;
+    left: 50%;
+    -webkit-transform: translate(-50%);
+    transform: translate(-50%);
+    background: black;
+    opacity: 0.4;
+    bottom: 15%;
+    width: 115%;
+    text-align: center;
+    border-radius: 50px;
+    z-index: -1;
+} */
+
+
+::-webkit-input-placeholder 
+{
+    text-align: center;
+    /* padding-left: 60px !important;  */
+    color:rgb(255, 255, 255,0.45) !important;
+    font-weight: 300;
+    margin-left:20% !important;
+}
+
+.error-label
+{
+    color:red !important;
+    font-weight: 600;
+    align-self: center;
+}
+
+div.title{
+    padding:5px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    color: white;
+    font-size: 35px;
+    text-decoration: overline;
+    text-align: center;
+}
+
+
+#submit-button{
+    margin-top: 30px;
+    width: 80%;
+    border-radius: inherit;
+    background-color: unset;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 40px;
+    align-self: center;
+
+
+}
+
+#submit-button:hover{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]), 
+input[type=email]:not(.browser-default):focus:not([readonly]){
+border-bottom: 1px solid ;  
+-webkit-box-shadow: 0 1px 0 0; 
+box-shadow: 0 1px 0 0
+}
+
+
+.error{
+   border: 1px solid red !important;
+   -webkit-box-shadow: 0 1px 0 0 red !important; 
+    box-shadow: 0 1px 0 0 red !important;
+}
