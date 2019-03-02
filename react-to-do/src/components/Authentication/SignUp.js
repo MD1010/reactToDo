@@ -46,7 +46,7 @@ class SignUp extends Component {
                 postData(usersURL, newUserData).then(responseFromServer=>{
                     
                    if(responseFromServer.error)
-                      this.setState({formErrors:{userName:"username already taken"}})
+                        alert("username already taken")
                    else{
                         this.setState({
                             firstName: "",
@@ -124,6 +124,7 @@ class SignUp extends Component {
 
     render() {
         let { formErrors } = this.state
+        console.log("first name errors are: ",formErrors.lastName)
         return (
             <div className="bgForm">
                 {/* <div className="transparent-bg sign-up"></div> */}
