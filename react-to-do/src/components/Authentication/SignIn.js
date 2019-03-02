@@ -34,14 +34,10 @@ class SignIn extends Component {
                     <div className="title">Sign In</div>
                     
                 <form className="form" onSubmit={this.submitForm}>
-                    <div className="field">
-                        {/* <i className="material-icons icon ">email</i>   */}
-                        <input className="email field" id="email" spellCheck="false" autoComplete="off" placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange} maxLength="40"></input>                            
-                    </div>
-                    <div className="field">
-                        {/* <i className="material-icons icon ">lock</i>   */}
-                        <input className="password field" spellCheck="false" autoComplete="off" placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="40"></input>
-                    </div>
+                    {/* <i className="material-icons icon ">email</i>   */}
+                    <input className="email field" id="email" spellCheck="false" autoComplete="off" placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange} maxLength="40"></input>                            
+                    {/* <i className="material-icons icon ">lock</i>   */}
+                    <input className="password field" spellCheck="false" autoComplete="off" placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="40"></input>
                     <button type="submit" id="submit-button" >Sign In</button>     
                 </form>
              </div>

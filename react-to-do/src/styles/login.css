@@ -16,16 +16,6 @@ body{
     width:100%;
 }
 
-
-.labelField{
-    display: flex;
-    flex-direction: row;
-    /* width:200%; */
-    margin:0;
-    padding:0;
-}
-
-
 input{
     text-align: center !important;
     color: white;
@@ -48,6 +38,11 @@ input{
     /* padding-right:50px; */
 }
 
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .bgForm{
     position: relative;
     top: 45%;
@@ -55,8 +50,8 @@ input{
     transform: translate(-50%,-50%);
     bottom: 5%;
     width: 50%;
-    text-align: center;
 }
+
 
 /* .transparent-bg{
     position: relative;
@@ -97,6 +92,7 @@ div.title{
     color: white;
     font-size: 35px;
     text-decoration: overline;
+    text-align: center;
 }
 
 
@@ -109,6 +105,8 @@ div.title{
     font-weight: bold;
     padding: 10px;
     border-radius: 40px;
+    align-self: center;
+
 
 }
 
