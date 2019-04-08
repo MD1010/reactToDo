@@ -4,6 +4,7 @@ import '../../react-to-do/src/styles/app.css'
 import Navbar from './Layout/Navbar';
 import SignUp from './components/Authentication/SignUp'
 import SignIn from './components/Authentication/SignIn';
+import MyZone from './components/MyZone';
 
 class App extends Component 
 {
@@ -17,6 +18,7 @@ class App extends Component
             <Switch>
                 <Route path='/SignIn' component={SignIn} />
                 <Route path='/SignUp' component={SignUp} />
+                <Route path='/MyTasks' component={MyZone} />                
                 <Redirect from="/" to="/SignIn"/>
 
             </Switch>

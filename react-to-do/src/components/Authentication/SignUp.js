@@ -85,7 +85,6 @@ class SignUp extends Component {
         let passwordErrorMessage = password.trim() ? "" : "required field"
         let emailErrorMessage = email.trim() ? "" : "required field"
         let retypedPasswordMessage = retypedPassword.trim() ? "" : "required field"
-        const spaceRegex = RegExp(/\s/)
         const passwordRegex = RegExp(/^.{4,8}$/)
         const emailRegex = RegExp(
         /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -95,7 +94,7 @@ class SignUp extends Component {
         if(emailErrorMessage === "")
         emailErrorMessage = emailRegex.test(email) ? "" : "Invalid Email address"
         if(passwordErrorMessage.length === 0 && retypedPassword) {
-            retypedPasswordMessage = password == retypedPassword ? "" : "passwords don't match"
+            retypedPasswordMessage = password === retypedPassword ? "" : "passwords don't match"
         }  
         await this.setState({
         formErrors : {
@@ -132,21 +131,21 @@ class SignUp extends Component {
 
                 <form className="form" onSubmit={this.submitForm}>
                             {/* <i className="material-icons icon ">person</i>                          */}
-                        <input className="firstName field" spellCheck="false" autoComplete="off" id="firstName" className={formErrors.firstName.length > 0 ? "error" : "input-bar"}  placeholder="first name" type="text" id="firstName" value={this.state.firstName} onChange={this.handleChange} maxLength="13"></input>
+                        <input spellCheck="false" autoComplete="off" id="firstName" className={formErrors.firstName.length > 0 ? "error field" : "input-bar field"}  placeholder="first name" type="text"  value={this.state.firstName} onChange={this.handleChange} maxLength="13"></input>
                         <label className="error-label">{formErrors.firstName}</label>  
                     
                         {/* <i className="material-icons icon ">person</i>   */}
-                        <input className="lastName field" spellCheck="false" autoComplete="off" id="lastName" className={formErrors.lastName.length > 0 ? "error" : "input-bar"}  placeholder="last name" type="text" id="lastName" value={this.state.lastName} onChange={this.handleChange} maxLength="13"></input>
+                        <input  spellCheck="false" autoComplete="off" id="lastName" className={formErrors.lastName.length > 0 ? "error field" : "input-bar field"}  placeholder="last name" type="text" value={this.state.lastName} onChange={this.handleChange} maxLength="13"></input>
                         <label className="error-label">{formErrors.lastName}</label>  
                    
                         {/* <i className="material-icons icon ">email</i>  */}
-                        <input className="email field" spellCheck="false" autoComplete="off" className={formErrors.email.length > 0 ? "error" : "input-bar"} placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange} maxLength="40"></input>                            
+                        <input spellCheck="false" autoComplete="off" className={formErrors.email.length > 0 ? "error field" : "input-bar field"} placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange} maxLength="40"></input>                            
                         <label className="error-label">{formErrors.email}</label>
                         {/* <i className="material-icons icon ">lock</i>  */}
-                        <input className="password field" spellCheck="false" autoComplete="off" className={formErrors.password.length > 0 ? "error" : "input-bar"} placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
+                        <input spellCheck="false" autoComplete="off" className={formErrors.password.length > 0 ? "error field" : "input-bar field"} placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
                         <label className="error-label">{formErrors.password}</label>
                         {/* <i className="material-icons icon ">keyboard</i>  */}
-                        <input className="retypedPassword field" spellCheck="false" autoComplete="off" className={formErrors.retypedPassword.length > 0 ? "error" : "input-bar"} placeholder="retype password" type="password" id="retypedPassword" value={this.state.retypedPassword} onChange={this.handleChange} maxLength="13"></input>
+                        <input spellCheck="false" autoComplete="off" className={formErrors.retypedPassword.length > 0 ? "error field" : "input-bar field"} placeholder="retype password" type="password" id="retypedPassword" value={this.state.retypedPassword} onChange={this.handleChange} maxLength="13"></input>
                         <label className="error-label">{formErrors.retypedPassword}</label>
                     <button type="submit" id="submit-button" >Create Account</button>     
                 </form>
