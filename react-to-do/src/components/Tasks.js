@@ -5,23 +5,15 @@ import Task from './Task';
 
 class Tasks extends React.Component {
 
-
     render() {
         const { todos } = this.props
 
         const toDoList = todos.length ?
             (
                 todos.map(todo => {
-                    return (
-                        <Task 
-                            key={todo.id}
-                            todo={todo} />
-                    )
+                    return (<Task key={todo.id} todo={todo} />)
                 })
-            )
-            : (
-                <p className="center"><b>You have no tasks left</b></p>
-            )
+            ) : (<p className="center"><b>You have no tasks left</b></p>)
 
         return (
             <div className="todos collection" id='tasks'>

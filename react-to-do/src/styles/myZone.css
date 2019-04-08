@@ -1,0 +1,11 @@
+.TaskZone{
+    display: flex;
+}
+
+.MyTasks{
+    width:50%;
+}
+
+.newTaskForm{
+    width:50%;
+}
