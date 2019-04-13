@@ -1,11 +1,19 @@
+.background{
+    background: white;
+    opacity: 0.1;
+    width: 50%;
+    height: 20%;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+}
+
 .TaskZone{
-    display: flex;
-}
-
-.MyTasks{
-    width:50%;
-}
-
-.newTaskForm{
-    width:50%;
+    width: 50%;
+    position: relative;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    
 }

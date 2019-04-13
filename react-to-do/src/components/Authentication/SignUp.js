@@ -123,7 +123,6 @@ class SignUp extends Component {
 
     render() {
         let { formErrors } = this.state
-        console.log("first name errors are: ",formErrors.lastName)
         return (
             <div className="bgForm">
                 {/* <div className="transparent-bg sign-up"></div> */}
