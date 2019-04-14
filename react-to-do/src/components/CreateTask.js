@@ -11,7 +11,9 @@ class CreateTask extends Component {
         super(props)
         this.state =
             {
-                content: ""
+                content: "",
+                owner: "",
+                date: ""
             }
     }
     componentDidMount() {
@@ -27,32 +29,39 @@ class CreateTask extends Component {
     createNewTask = (event) => {
         event.preventDefault()
         this.openNewTaskSwal()
-        this.props.createTask(this.state)
     }
 
     openNewTaskSwal = () => {
         Swal.fire({
+            title: "Write your task here..",
             input: 'textarea',
             inputPlaceholder: 'Type your message here...',
             showCancelButton: true,
             position: "center",
             heightAuto: false,
+            
         }).then((result) => {
-            if (result.value){
+            if (result.value) {
+                this.setState({ content: result.value, owner: "Misha", date: new Date() })
+                this.props.createTask(this.state)
                 this.makeConfirmationSwal(result)
-                this.setState({content:result.value})
             }
+        }).then(()=>{
+            console.log("after add..", this.props.tasks)
         })
 
     }
 
 
-    makeConfirmationSwal = (result) => {
+    makeConfirmationSwal = () => {
         Swal.fire({
             heightAuto: false,
             type: 'success',
-            text: result.value + " was added successfuly"
-
+            text: "Your task was successfuly added!",
+            toast: true,
+            position: "top-right",
+            timer: 2000,
+            showConfirmButton:false, 
         });
     }
 
@@ -71,4 +80,10 @@ const mapDispachToProps = (dispach) => {
     }
 }
 
-export default connect(null, mapDispachToProps)(CreateTask)
+const mapStateToProps = (state) => {
+    return {
+        tasks: state.task.tasks
+    }
+}
+
+export default connect(mapStateToProps, mapDispachToProps)(CreateTask)

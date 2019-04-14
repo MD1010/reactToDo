@@ -1,5 +1,9 @@
 /*added task css*/
 
 .swal-text {
-    font-weight: bold
+    font-weight: bold;
+}
+
+#swal2-content{
+    font-weight: bold;
 }
