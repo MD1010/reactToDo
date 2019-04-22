@@ -11,8 +11,9 @@ class CreateTask extends Component {
         super(props)
         this.state =
             {
+                ownerFirstName:"",
+                ownerLastName:"",
                 content: "",
-                owner: "",
                 date: ""
             }
     }
@@ -42,7 +43,12 @@ class CreateTask extends Component {
             
         }).then((result) => {
             if (result.value) {
-                this.setState({ content: result.value, owner: "Misha", date: new Date() })
+                this.setState({ 
+                    ownerFirstName: "Michael",  
+                    ownerLastName:"Deglin", 
+                    content: result.value,   
+                    date: new Date().toDateString() 
+                })
                 this.props.createTask(this.state)
                 this.makeConfirmationSwal(result)
             }
