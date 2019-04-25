@@ -4,15 +4,15 @@ import { connect } from 'react-redux'
 import $ from 'jquery'
 import Swal from 'sweetalert2'
 import '../styles/swals.css'
-
+import { makeConfirmationSwal } from '../helpers/swalFunctions'
 
 class CreateTask extends Component {
     constructor(props) {
         super(props)
         this.state =
             {
-                ownerFirstName:"",
-                ownerLastName:"",
+                ownerFirstName: "",
+                ownerLastName: "",
                 content: "",
                 date: ""
             }
@@ -40,36 +40,23 @@ class CreateTask extends Component {
             showCancelButton: true,
             position: "center",
             heightAuto: false,
-            
+
         }).then((result) => {
-            
+
             if (result.value) {
-                this.setState({ 
-                    ownerFirstName: "Michael",  
-                    ownerLastName:"Deglin", 
-                    content: result.value,   
-                    date: new Date().toDateString() 
+                this.setState({
+                    ownerFirstName: "Michael",
+                    ownerLastName: "Deglin",
+                    content: result.value,
+                    date: new Date().toDateString()
                 })
                 this.props.createTask(this.state)
-                this.makeConfirmationSwal(result)
+                makeConfirmationSwal(result)
             }
         })
 
     }
 
-
-    makeConfirmationSwal = () => {
-        Swal.fire({
-            type: 'success',
-            text: "Your task was successfuly added!",
-            toast: true,
-            position: "top-right",
-            timer: 2000,
-            showConfirmButton:false, 
-        });
-    }
-
-    
 
     render() {
         return (

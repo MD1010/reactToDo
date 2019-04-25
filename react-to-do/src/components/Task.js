@@ -1,8 +1,8 @@
 import React from 'react'
 import { deleteToDo } from '../store/Actions/taskActions'
 import { updateToDo } from '../store/Actions/taskActions'
-import Swal from 'sweetalert2'
 import { connect } from 'react-redux'
+import { UpdateSwal, DeleteSwal } from '../helpers/swalFunctions'
 
 const Task = ({ todo, deleteTask, updateTask }) => {
     return (
@@ -18,52 +18,6 @@ const Task = ({ todo, deleteTask, updateTask }) => {
             </div>
         </div>
     );
-}
-const DeleteSwal = (todo, deleteFunction) => {
-    Swal.fire({
-        type:'warning',
-        text: 'Are you sure you want to delete the task?',
-        showCancelButton: true,
-        position: "center",
-        heightAuto: false,
-
-    }).then((result) => {
-        if (result.value) {
-            deleteFunction(todo)
-            Swal.fire({
-                type: 'error',
-                text: " Your task was deleted successfuly!",
-                toast: true,
-                position: "top-right",
-                timer: 2000,
-                showConfirmButton: false,
-            });
-        }
-    })
-}
-
-const UpdateSwal = (todo, updateFunction) => {
-    Swal.fire({
-        input: 'text',
-        inputPlaceholder: 'Type your new task here...',
-        showCancelButton: true,
-        position: "center",
-        heightAuto: false,
-
-    }).then((result) => {
-        let newContent = result.value
-        if (result.value) {
-            updateFunction(todo, newContent)
-            Swal.fire({
-                type: 'info',
-                text: " Your task was edited successfuly!",
-                toast: true,
-                position: "top-right",
-                timer: 2000,
-                showConfirmButton: false,
-            });
-        }
-    })
 }
 
 const mapDispachToProps = (dispach) => {
