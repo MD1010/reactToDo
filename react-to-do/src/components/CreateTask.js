@@ -35,13 +35,14 @@ class CreateTask extends Component {
     openNewTaskSwal = () => {
         Swal.fire({
             title: "Write your task here..",
-            input: 'textarea',
+            input: 'text',
             inputPlaceholder: 'Type your message here...',
             showCancelButton: true,
             position: "center",
             heightAuto: false,
             
         }).then((result) => {
+            
             if (result.value) {
                 this.setState({ 
                     ownerFirstName: "Michael",  
@@ -52,8 +53,6 @@ class CreateTask extends Component {
                 this.props.createTask(this.state)
                 this.makeConfirmationSwal(result)
             }
-        }).then(()=>{
-            console.log("after add..", this.props.tasks)
         })
 
     }
@@ -61,7 +60,6 @@ class CreateTask extends Component {
 
     makeConfirmationSwal = () => {
         Swal.fire({
-            heightAuto: false,
             type: 'success',
             text: "Your task was successfuly added!",
             toast: true,
@@ -71,7 +69,7 @@ class CreateTask extends Component {
         });
     }
 
-
+    
 
     render() {
         return (
@@ -86,10 +84,4 @@ const mapDispachToProps = (dispach) => {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        tasks: state.task.tasks
-    }
-}
-
-export default connect(mapStateToProps, mapDispachToProps)(CreateTask)
+export default connect(null, mapDispachToProps)(CreateTask)

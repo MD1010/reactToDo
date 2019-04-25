@@ -1,10 +1,5 @@
 const initState = {
-    tasks: [
-        { ownerFirstName: 'bla', ownerLastName: 'bla', content: 'My first task', date: 'Today' },
-        { ownerFirstName: 'bla', ownerLastName: 'bla', content: 'My second task', date: 'Yesterday' },
-        { ownerFirstName: 'bla', ownerLastName: 'bla', content: 'My third task', date: 'Apr 19' },
-
-    ]
+    tasks: []
 }
 const taskReducer = (state = initState, action) => {
     switch (action.type) {
@@ -24,7 +19,8 @@ const taskReducer = (state = initState, action) => {
         case 'ADD_ERROR':
             console.log('create project error', action.payload)
             return state
-
+        case 'DELETE_TODO':
+            return state
         default:
             return state
     }

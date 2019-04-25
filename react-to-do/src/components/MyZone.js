@@ -3,6 +3,8 @@ import Tasks from './Tasks'
 import CreateTask from './CreateTask'
 import SearchTask from '../components/SearchTask'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { firestoreConnect } from 'react-redux-firebase'
 import '../styles/myZone.css'
 class MyZone extends Component {
 
@@ -13,8 +15,8 @@ class MyZone extends Component {
       <div className="TaskZone">
         {/* <div className="background" /> */}
         <SearchTask />
-        <div className="MyTasks">
-          <Tasks todos={tasks} />
+        <div className="MyTasks" >
+          <Tasks todos={tasks}/>
         </div>
         <CreateTask />
       </div>
@@ -22,9 +24,19 @@ class MyZone extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  return {
-    tasks: state.task.tasks
+  if(state.firestore.ordered.tasks){
+    return {
+      tasks: state.firestore.ordered.tasks
+    }
+  }
+  else 
+  return{
+      tasks: []
   }
 }
-
-export default connect(mapStateToProps)(MyZone);
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([
+    { collection : 'tasks'} 
+  ]) 
+)(MyZone);
