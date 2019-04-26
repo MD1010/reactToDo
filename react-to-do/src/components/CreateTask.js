@@ -60,7 +60,7 @@ class CreateTask extends Component {
 
     render() {
         return (
-            <button onClick={this.createNewTask} className="btn-floating btn-large waves-effect waves-light blue right"><i className="material-icons">add</i></button>
+            <button onClick={this.createNewTask} className="plusIcon btn-floating btn-large waves-effect waves-light right"><i className="material-icons">add</i></button>
         )
     }
 }

@@ -1,14 +1,7 @@
 .deleteIcon ,.editIcon
 {
     cursor: pointer;
-}
-
-.list
-{
-    border: 0.2px solid;
-    margin: 7px;
-    padding: 5px;
-    background: linear-gradient(to right,#5260e6,#26c6ce,#24dbdd,#37b9e9,#35bce7,#5260e6);
+    color: aliceblue
 }
 
 .title   
@@ -16,6 +9,11 @@
     font-weight: bold;
     font-size: 32px;
 }
+.collection{
+    border: 0px white solid !important;
+    overflow-y: scroll;
+    max-height: 600px;
+}   
 .collection-item
 {
     border: 0 solid;
@@ -23,18 +21,24 @@
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
-    padding: 0px;
+    padding: 0px !important;
 }
  .collection-item .mission-text 
 {
-    width:85%;
+    width:90%;
     overflow: hidden;
     white-space: initial;
+    color: white;
 }
 
-body
-{
-    margin: 45px;   
+.collection .collection-item{
+    /* border: 0.5px white solid; */
+    border-bottom: 0.3px white solid !important;
+    background-color: transparent;
+    opacity: 0.7;
+    margin: 10px;
+    /* padding: 2px !important;     */
+    /* border-radius: 40px 40px; */
 }
 
 .swal-button--confirm{
@@ -116,3 +120,19 @@ body
         transform: rotate(360deg);
     }
 }
+
+::-webkit-scrollbar {
+    width: 15px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #808080; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #25277a ;
+    opacity: 0.7; 
+  }
+  
