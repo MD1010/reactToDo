@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import '../styles/myZone.css'
-import { $, jQuery } from 'jquery'
 
 class MyZone extends Component {
 
@@ -27,8 +26,6 @@ class MyZone extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  // console.log("from mapStateConnectedToFireBase",state)
-
   if (state.firestore.ordered.tasks) {
     return {
       tasks: state.firestore.ordered.tasks
