@@ -10,7 +10,7 @@
 }
 
 .TaskZone{
-    width: 70%;
+    width: 60%;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -29,6 +29,10 @@
 .plusIcon:hover{
     background:white !important;
     border:1px solid white !important;
+}
+
+.plusIcon .hide{
+    visibility: hidden;
 }
 
 .btn-large i:hover{

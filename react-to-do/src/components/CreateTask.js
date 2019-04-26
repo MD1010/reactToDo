@@ -59,8 +59,9 @@ class CreateTask extends Component {
 
 
     render() {
+        let { tasks } = this.props
         return (
-            <button onClick={this.createNewTask} className="plusIcon btn-floating btn-large waves-effect waves-light right"><i className="material-icons">add</i></button>
+            <button onClick={this.createNewTask} className={tasks == null ? "hide" : "plusIcon btn-floating btn-large waves-effect waves-light right"}><i className="material-icons">add</i></button>
         )
     }
 }
@@ -71,4 +72,10 @@ const mapDispachToProps = (dispach) => {
     }
 }
 
-export default connect(null, mapDispachToProps)(CreateTask)
+const mapStateToProps = (state) => {
+    return {
+        tasks: state.firestore.ordered.tasks
+    }
+}
+
+export default connect(mapStateToProps, mapDispachToProps)(CreateTask)
