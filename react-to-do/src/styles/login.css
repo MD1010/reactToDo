@@ -85,6 +85,10 @@ body{
     align-self: center;
 }
 
+.failedLogin{
+    margin-top: 15px;
+}
+
 div.title{
     padding:5px;
     margin-bottom: 10px;

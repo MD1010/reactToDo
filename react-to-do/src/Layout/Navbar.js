@@ -5,6 +5,8 @@ import SearchTask from '../components/SearchTask'
 import '../styles/myZone.css'
 import '../styles/navBar.css'
 
+import { connect } from 'react-redux'
+
 const Navbar = () => {
     return (
         <div className="row">
@@ -16,9 +18,14 @@ const Navbar = () => {
                     <SignedInLinks />
                     <SignOutLinks />
                 </div>
-        </nav>
-            </div>
+            </nav>
+        </div>
     )
 }
 
-export default Navbar
+const mapStateToProps = (state) => {
+    return{
+
+    }
+}
+export default connect(mapStateToProps)(Navbar)

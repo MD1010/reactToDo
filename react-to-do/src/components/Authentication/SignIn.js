@@ -1,45 +1,69 @@
 import React, { Component } from 'react'
 import '../../styles/login.css'
+import '../../styles/tasks.css'
 import $ from 'jquery'
+import { connect } from 'react-redux'
+import { LogIn } from '../../store/Actions/authActions'
 
 class SignIn extends Component {
     constructor(props) {
         super(props)
         this.state =
-        {
-            email: "",
-            password: ""
-        }
+            {
+                email: "",
+                password: "",
+                loading: false
+            }
     }
-    componentDidMount(){
+    componentDidMount() {
         $("#email").focus();
     }
-    
+
     submitForm = (event) => {
+        let { LogUser } = this.props
         event.preventDefault()
+        let { email, password } = this.state
+        if (email === "" || password === "")
+            console.error("invalid form");
+        else {
+            LogUser(this.state)
+        }
     }
-      
+
     handleChange = (event) => {
         let { id, value } = event.target;
         this.setState({ [id]: value })
     }
 
     render() {
+        console.log(this.state.loading);
+
         return (
+            /* <div className={this.state.loading ? "spinner" : ""} /> */
             <div className="bgForm">
-                {/* <div className="transparent-bg sign-in"></div> */}
+                <div className="transparent-bg sign-in"></div> */}
                     <div className="title">Sign In</div>
-                    
                 <form className="form" onSubmit={this.submitForm}>
                     {/* <i className="material-icons icon ">email</i>   */}
-                    <input className="email field" id="email" spellCheck="false" autoComplete="off" placeholder="email" type="text" value={this.state.email} onChange={this.handleChange} maxLength="40"></input>                            
+                    <input className="email field" id="email" spellCheck="false" autoComplete="off" placeholder="email" type="text" value={this.state.email} onChange={this.handleChange} maxLength="40"></input>
                     {/* <i className="material-icons icon ">lock</i>   */}
                     <input className="password field" spellCheck="false" autoComplete="off" placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="40"></input>
-                    <button type="submit" id="submit-button" >Sign In</button>     
+                    <button type="submit" id="submit-button" >Sign In</button>
+                    <div className="error-label failedLogin">{this.props.authError}</div>
                 </form>
-             </div>
+            </div>
         )
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        authError: state.auth.authError
+    }
+}
 
-export default SignIn
+const mapDispachToProps = (dispach) => {
+    return {
+        LogUser: (credentials) => dispach(LogIn(credentials))
+    }
+}
+export default connect(mapStateToProps, mapDispachToProps)(SignIn)
