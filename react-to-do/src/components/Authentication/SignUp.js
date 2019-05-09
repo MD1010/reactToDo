@@ -1,159 +1,103 @@
 import React, { Component } from 'react'
-import { postData } from '../../helpers/utils'
-import { usersURL } from '../../helpers/consts'
 import '../../styles/login.css'
+import { connect } from 'react-redux'
+import { SignUpNewUser } from '../../store/Actions/authActions'
+import { Redirect } from 'react-router-dom'
 import $ from 'jquery'
 
 class SignUp extends Component {
     constructor(props) {
         super(props)
         this.state =
-        {
-            firstName: "",
-            lastName: "",
-            password: "",
-            email: "",
-            retypedPassword: "",
-            submitted: false,
-        
-            formErrors: {
+            {
                 firstName: "",
                 lastName: "",
-                email: "",
                 password: "",
+                email: "",
                 retypedPassword: ""
             }
-        }
     }
-    componentDidMount(){
+    componentDidMount() {
         $("#firstName").focus();
     }
-    
+
     submitForm = (event) => {
-        this.setState({submitted: true})
+        let { SignUp, auth } = this.props
         event.preventDefault()
-        let newUserData = {firstName:"", lastName: "", password:"", email:""}
-        this.validateFormFields().then((valid)=>{
+        let newUserData = { firstName: "", lastName: "", password: "", email: "" }
 
-            if(valid){
-                console.log(`--- new user details ---\n firstName:${this.state.firstName} lastName:${this.state.lastName} \n password:${this.state.password} \n email:${this.state.email}`) 
-                let { firstName, lastName, password, email } = this.state
-                newUserData.firstName = firstName
-                newUserData.lastName = lastName
-                newUserData.password = password
-                newUserData.email = email
-                
-                postData(usersURL, newUserData).then(responseFromServer=>{
-                    
-                   if(responseFromServer.error)
-                        alert("username already taken")
-                   else{
-                        this.setState({
-                            firstName: "",
-                            lastName: "",
-                            password: "",
-                            retypedPassword: "",
-                            email: "",
-                            submitted: false,
-            
-                            formErrors: {
-                                firstName: "",
-                                lastName:"",
-                                email: "",
-                                password: "",
-                                retypedPassword: ""
-                            }
-                        })
-                    }
-                }) 
-               
-                $("#firstName").focus();
-            }
-            
-            else
-                console.error("Invalid form")
-        })
-       
-    }
-   
-    validateFormFields = async () => 
-    {
-        let { firstName, lastName, password, email, retypedPassword } = this.state
-        let valid = true
-        let firstNameErrorMessage = firstName.trim() ? "" : "required field"
-        let lastNameErrorMessage = lastName.trim() ? "" : "required field"
-        let passwordErrorMessage = password.trim() ? "" : "required field"
-        let emailErrorMessage = email.trim() ? "" : "required field"
-        let retypedPasswordMessage = retypedPassword.trim() ? "" : "required field"
-        const passwordRegex = RegExp(/^.{4,8}$/)
-        const emailRegex = RegExp(
-        /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-        );
-        if(passwordErrorMessage === "")
-        passwordErrorMessage = passwordRegex.test(password) ? "": "password has to be between 4 and 8 characters" 
-        if(emailErrorMessage === "")
-        emailErrorMessage = emailRegex.test(email) ? "" : "Invalid Email address"
-        if(passwordErrorMessage.length === 0 && retypedPassword) {
-            retypedPasswordMessage = password === retypedPassword ? "" : "passwords don't match"
-        }  
-        await this.setState({
-        formErrors : {
-            firstName : firstNameErrorMessage,
-            lastName : lastNameErrorMessage,
-            email : emailErrorMessage,
-            password : passwordErrorMessage,
-            retypedPassword : retypedPasswordMessage
+        let { firstName, lastName, password, email } = this.state
+        newUserData.firstName = firstName
+        newUserData.lastName = lastName
+        newUserData.password = password
+        newUserData.email = email
+        SignUp(newUserData)
+        if (auth.uid) {
+            $("#firstName").focus()
+            this.setState({
+                firstName: "",
+                lastName: "",
+                password: "",
+                email: "",
+                retypedPassword: "",
+                tasks: []
+            })
         }
-        })
-
-        Object.values(this.state.formErrors).forEach(field => {
-        field.length > 0 && (valid = false)
-        }); 
-
-        return valid
     }
-        
+
     handleChange = (event) => {
-        let { id, value } = event.target;
-        this.setState({ [id]: value }, ()=>{
-            if(this.state.submitted)
-            this.validateFormFields()
-        });
+        let { id, value } = event.target
+        this.setState({ [id]: value })
     }
-
     render() {
-        let { formErrors } = this.state
+        let { auth } = this.props
+        if (auth.uid) {
+            return <Redirect to='/MyTasks'></Redirect>
+        }
+        let { errors } = this.props
         return (
             <div className="bgForm">
                 {/* <div className="transparent-bg sign-up"></div> */}
-                    <div className="title">Sign Up</div>
+                <div className="title">Sign Up</div>
 
                 <form className="form" onSubmit={this.submitForm}>
-                            {/* <i className="material-icons icon ">person</i>                          */}
-                        <input spellCheck="false" autoComplete="off" id="firstName" className={formErrors.firstName.length > 0 ? "error field" : "input-bar field"}  placeholder="first name" type="text"  value={this.state.firstName} onChange={this.handleChange} maxLength="13"></input>
-                        <label className="error-label">{formErrors.firstName}</label>  
-                    
-                        {/* <i className="material-icons icon ">person</i>   */}
-                        <input  spellCheck="false" autoComplete="off" id="lastName" className={formErrors.lastName.length > 0 ? "error field" : "input-bar field"}  placeholder="last name" type="text" value={this.state.lastName} onChange={this.handleChange} maxLength="13"></input>
-                        <label className="error-label">{formErrors.lastName}</label>  
-                   
-                        {/* <i className="material-icons icon ">email</i>  */}
-                        <input spellCheck="false" autoComplete="off" className={formErrors.email.length > 0 ? "error field" : "input-bar field"} placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange} maxLength="40"></input>                            
-                        <label className="error-label">{formErrors.email}</label>
-                        {/* <i className="material-icons icon ">lock</i>  */}
-                        <input spellCheck="false" autoComplete="off" className={formErrors.password.length > 0 ? "error field" : "input-bar field"} placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
-                        <label className="error-label">{formErrors.password}</label>
-                        {/* <i className="material-icons icon ">keyboard</i>  */}
-                        <input spellCheck="false" autoComplete="off" className={formErrors.retypedPassword.length > 0 ? "error field" : "input-bar field"} placeholder="retype password" type="password" id="retypedPassword" value={this.state.retypedPassword} onChange={this.handleChange} maxLength="13"></input>
-                        <label className="error-label">{formErrors.retypedPassword}</label>
-                    <button type="submit" id="submit-button" >Create Account</button>     
+                    {/* <i className="material-icons icon ">person</i>                          */}
+                    {/* <input spellCheck="false" autoComplete="off" id="firstName" className={formErrors.firstName.length > 0 ? "error field" : "input-bar field"} placeholder="first name" type="text" value={this.state.firstName} onChange={this.handleChange} maxLength="13"></input> */}
+                    <input spellCheck="false" autoComplete="off" id="firstName" className="input-bar field" placeholder="first name" type="text" value={this.state.firstName} onChange={this.handleChange} maxLength="13"></input>
+                    {/* <label className="error-label">{formErrors.firstName}</label> */}
+
+                    {/* <i className="material-icons icon ">person</i>   */}
+                    <input spellCheck="false" autoComplete="off" id="lastName" className="input-bar field" placeholder="last name" type="text" value={this.state.lastName} onChange={this.handleChange} maxLength="13"></input>
+                    {/* <label className="error-label">{formErrors.lastName}</label> */}
+
+                    {/* <i className="material-icons icon ">email</i>  */}
+                    <input spellCheck="false" autoComplete="off" className="input-bar field" placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange} maxLength="40"></input>
+                    {/* <label className="error-label">{formErrors.email}</label> */}
+                    {/* <i className="material-icons icon ">lock</i>  */}
+                    <input spellCheck="false" autoComplete="off" className="input-bar field" placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
+                    {/* <label className="error-label">{formErrors.password}</label> */}
+                    {/* <i className="material-icons icon ">keyboard</i>  */}
+                    <input spellCheck="false" autoComplete="off" className="input-bar field" placeholder="retype password" type="password" id="retypedPassword" value={this.state.retypedPassword} onChange={this.handleChange} maxLength="13"></input>
+                    {/* <label className="error-label">{formErrors.retypedPassword}</label> */}
+                    <button type="submit" id="submit-button" >Create Account</button>
+                    <label className="error-label">{errors}</label>
                 </form>
-                    
-             </div>
-            
-            
+            </div>
         )
     }
 }
 
-export default SignUp
+const mapDispachToProps = (dispach) => {
+    return {
+        SignUp: (newUser) => { dispach(SignUpNewUser(newUser)) }
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        errors: state.auth.authError,
+        auth: state.firebase.auth
+    }
+}
+
+export default connect(mapStateToProps, mapDispachToProps)(SignUp)

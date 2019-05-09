@@ -42,11 +42,11 @@ class CreateTask extends Component {
             heightAuto: false,
 
         }).then((result) => {
-
+            let { profile } = this.props
             if (result.value) {
                 this.setState({
-                    ownerFirstName: "Michael",
-                    ownerLastName: "Deglin",
+                    ownerFirstName: profile.firstName,
+                    ownerLastName: profile.lastName,
                     content: result.value,
                     date: new Date().toDateString()
                 })
@@ -74,7 +74,8 @@ const mapDispachToProps = (dispach) => {
 
 const mapStateToProps = (state) => {
     return {
-        tasks: state.firestore.ordered.tasks
+        tasks: state.firestore.ordered.tasks,
+        profile: state.firebase.profile
     }
 }
 

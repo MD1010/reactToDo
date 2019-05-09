@@ -1,16 +1,35 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { LogOut } from '../store/Actions/authActions'
+import '../styles/tasks.css'
 
-const SignedInLinks = () =>
-{
-    return(
+const SignedInLinks = (props) => {
+    let { initials } = props
+    return (
         <ul className="right">
-                <li><NavLink to='/MyTasks'>My tasks</NavLink></li>
-                <li><NavLink to='/NewTask'>Add new task</NavLink></li>
-                <li><NavLink to='/SignIn'>Log Out</NavLink></li>
-                <li><NavLink to='/' className="btn-floating pink center">MD</NavLink></li>
+            <li><NavLink to='/MyTasks'>My tasks</NavLink></li>
+            <li><NavLink to='/EmailTasks'>Email Tasks</NavLink></li>
+            <li><a onClick={props.LogOut}>Log Out</a></li>
+            <li><NavLink to='/' className="btn-floating pink center">{initials}</NavLink></li>
         </ul>
     )
 }
 
-export default SignedInLinks
+const mapStateToProps = (state) => {
+    let user = state.firebase.profile    
+    let initials = ""
+    if (user.firstName && user.lastName) {
+        initials = user.firstName[0] + user.lastName[0]
+    }
+    return {
+        initials: initials
+    }
+
+}
+const mapDispachToProps = (dispach) => {
+    return {
+        LogOut: () => dispach(LogOut())
+    }
+}
+export default connect(mapStateToProps, mapDispachToProps)(SignedInLinks)

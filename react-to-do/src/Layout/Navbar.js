@@ -7,7 +7,9 @@ import '../styles/navBar.css'
 
 import { connect } from 'react-redux'
 
-const Navbar = () => {
+const Navbar = (props) => {
+    const { auth } = props
+    let loadedNavbar = auth.uid ? <SignedInLinks /> : <SignOutLinks />
     return (
         <div className="row">
             <nav className="nav-wrapper blue darken-3 left" >
@@ -15,8 +17,7 @@ const Navbar = () => {
                     <SearchTask />
                 </div>
                 <div className="cols6">
-                    <SignedInLinks />
-                    <SignOutLinks />
+                    {loadedNavbar}
                 </div>
             </nav>
         </div>
@@ -24,8 +25,8 @@ const Navbar = () => {
 }
 
 const mapStateToProps = (state) => {
-    return{
-
+    return {
+        auth: state.firebase.auth,
     }
 }
 export default connect(mapStateToProps)(Navbar)

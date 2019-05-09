@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 const makeConfirmationSwal = () => {
     Swal.fire({
         type: 'success',
-        text: "Your task was successfuly added!",
+        text: "Your task was successfully added!",
         toast: true,
         position: "top-right",
         timer: 2000,
@@ -24,7 +24,7 @@ const DeleteSwal = (todo, deleteFunction) => {
             deleteFunction(todo)
             Swal.fire({
                 type: 'error',
-                text: " Your task was deleted successfuly!",
+                text: " Your task was deleted successfully!",
                 toast: true,
                 position: "top-right",
                 timer: 2000,
@@ -48,7 +48,7 @@ const UpdateSwal = (todo, updateFunction) => {
             updateFunction(todo, newContent)
             Swal.fire({
                 type: 'info',
-                text: " Your task was edited successfuly!",
+                text: " Your task was edited successfully!",
                 toast: true,
                 position: "top-right",
                 timer: 2000,

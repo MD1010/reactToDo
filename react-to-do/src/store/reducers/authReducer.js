@@ -4,8 +4,7 @@ const initState = {
 const authReducer = (state = initState, action) => {
     switch (action.type) {
         case 'LOGIN_ERROR':
-        console.log("login error");
-        
+            console.log("login error");
             return {
                 ...state,
                 authError: 'Wrong email or password'
@@ -16,8 +15,31 @@ const authReducer = (state = initState, action) => {
                 ...state,
                 authError: null,
             }
+        case 'LOGOUT_ERROR':
+            console.log("logout failed")
+            return {
+                ...state,
+                authError: action.err.message
+            }
+        case 'LOGOUT_SUCCESS':
+            console.log("logout successfully");
+            return state
+
+        case 'SIGNUP_ERROR':
+            console.log("signup failed")
+            return {
+                ...state,
+                authError: action.err.message
+            }
+        case 'SIGNUP_SUCCESS':
+            console.log("Signup successfully");
+            return {
+                ...state,
+                authError: null
+            }
         default:
             return state
+
     }
 }
 

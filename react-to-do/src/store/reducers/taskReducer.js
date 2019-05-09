@@ -21,6 +21,13 @@ const taskReducer = (state = initState, action) => {
             return state
         case 'DELETE_TODO':
             return state
+        case 'RETRIEVE_TASKS':
+            return {
+                tasks: [action.userTasks]
+            }
+        case 'RETRIEVE_FAILED':
+            console.log("failed to retrieve any tasks",action.err.message);
+            return state
         default:
             return state
     }

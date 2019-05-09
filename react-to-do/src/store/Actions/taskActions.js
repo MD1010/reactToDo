@@ -37,3 +37,23 @@ export const updateToDo = (task, value) => {
         })
     }
 }
+export const getMyTasks = (loggedUser) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        let myTasks = []
+        const firestore = getFirestore()
+        firestore.collection('tasks').where("ownerFirstName", "==", loggedUser.firstName)
+            .where("ownerLastName", "==", loggedUser.lastName)
+            .get().then((documents) => {
+                documents.foreach((doc) => {
+                    myTasks.push(doc.data())
+                })
+            }).then(() => {
+                dispatch({ type: "RETRIEVED_TASKS", userTasks: myTasks })
+            }).catch((err) => {
+                dispatch({ type: "RETRIEVE_FAILED", err })
+            })
+    }
+}
+//export const getTasks = ()....
+//then dispach to retrieve tasks there set the tasks property to what i retrieved
+// then in myZone place that specific tasks to be seen

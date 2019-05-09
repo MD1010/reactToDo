@@ -4,12 +4,16 @@ import CreateTask from './CreateTask'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
+import { Redirect } from 'react-router-dom'
 import '../styles/myZone.css'
 
 class MyZone extends Component {
 
   render() {
-    const { tasks } = this.props
+    const { tasks, auth } = this.props
+    if (auth) {
+      if (!auth.uid) return <Redirect to='/SignIn'></Redirect>
+    }
     return (
       <React.Fragment>
         <div className={tasks == null ? "spinner" : ""}></div>
@@ -25,15 +29,18 @@ class MyZone extends Component {
     );
   }
 }
+//get the property from the reducer 'tasks' that gets the tasks of the logged user
 const mapStateToProps = (state) => {
   if (state.firestore.ordered.tasks) {
     return {
-      tasks: state.firestore.ordered.tasks
+      tasks: state.firestore.ordered.tasks,
+      auth: state.firebase.auth
     }
   }
   else
     return {
-      tasks: null
+      tasks: null,
+      auth: null
     }
 }
 export default compose(

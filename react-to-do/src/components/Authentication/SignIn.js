@@ -3,6 +3,7 @@ import '../../styles/login.css'
 import '../../styles/tasks.css'
 import $ from 'jquery'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { LogIn } from '../../store/Actions/authActions'
 
 class SignIn extends Component {
@@ -36,8 +37,10 @@ class SignIn extends Component {
     }
 
     render() {
-        console.log(this.state.loading);
-
+        const { auth } = this.props
+        if (auth) {
+            if (auth.uid) return <Redirect to='/MyTasks'></Redirect>
+        }
         return (
             /* <div className={this.state.loading ? "spinner" : ""} /> */
             <div className="bgForm">
@@ -57,7 +60,8 @@ class SignIn extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        authError: state.auth.authError
+        authError: state.auth.authError,
+        auth: state.firebase.auth
     }
 }
 
