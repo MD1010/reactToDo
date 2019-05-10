@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
     let user = state.firebase.profile    
     let initials = ""
     if (user.firstName && user.lastName) {
-        initials = user.firstName[0] + user.lastName[0]
+        initials = user.firstName[0].toUpperCase() + user.lastName[0].toUpperCase()
     }
     return {
         initials: initials

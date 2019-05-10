@@ -15,8 +15,8 @@ class MyZone extends Component {
     const { tasks, auth } = this.props
     if (auth) {
       if (!auth.uid) return <Redirect to='/SignIn'></Redirect>
-      let { retrieveTasks, profile } = this.props
-      retrieveTasks(profile)
+      // let { retrieveTasks, profile } = this.props
+      // retrieveTasks(profile)
     }
     return (
       <React.Fragment>
