@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { Redirect } from 'react-router-dom'
+import { getMyTasks } from '../store/Actions/taskActions'
+
 import '../styles/myZone.css'
 
 class MyZone extends Component {
@@ -13,6 +15,8 @@ class MyZone extends Component {
     const { tasks, auth } = this.props
     if (auth) {
       if (!auth.uid) return <Redirect to='/SignIn'></Redirect>
+      let { retrieveTasks, profile } = this.props
+      retrieveTasks(profile)
     }
     return (
       <React.Fragment>
@@ -31,10 +35,13 @@ class MyZone extends Component {
 }
 //get the property from the reducer 'tasks' that gets the tasks of the logged user
 const mapStateToProps = (state) => {
+  console.log(state)
   if (state.firestore.ordered.tasks) {
     return {
+      //check how to get the tasks of specific user not all the tasks
       tasks: state.firestore.ordered.tasks,
-      auth: state.firebase.auth
+      auth: state.firebase.auth,
+      profile: state.firebase.profile,
     }
   }
   else
@@ -43,8 +50,14 @@ const mapStateToProps = (state) => {
       auth: null
     }
 }
+
+const mapDispachToProps = (dispach) => {
+  return {
+    retrieveTasks: (profile) => { dispach(getMyTasks(profile)) }
+  }
+}
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps,mapDispachToProps),
   firestoreConnect([
     { collection: 'tasks' }
   ])

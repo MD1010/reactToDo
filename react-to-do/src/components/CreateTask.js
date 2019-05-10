@@ -57,7 +57,6 @@ class CreateTask extends Component {
 
     }
 
-
     render() {
         let { tasks } = this.props
         return (

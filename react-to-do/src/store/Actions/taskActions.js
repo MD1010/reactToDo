@@ -3,6 +3,7 @@ export const addToDo = (task) => {
         const firestore = getFirestore()
         firestore.collection('tasks').add({
             ...task
+            //can comment after this
         }).then(() => {
             dispatch({ type: 'ADD_TODO', payload: task })
             //here you want to add a reference to document of the task added to 
@@ -44,16 +45,16 @@ export const getMyTasks = (loggedUser) => {
         firestore.collection('tasks').where("ownerFirstName", "==", loggedUser.firstName)
             .where("ownerLastName", "==", loggedUser.lastName)
             .get().then((documents) => {
+                console.log("documents",documents)
                 documents.foreach((doc) => {
+                    //problem that there is id but data doesnt exist
                     myTasks.push(doc.data())
                 })
-            }).then(() => {
+            }).then((data) => {
+                console.log("data",data)
                 dispatch({ type: "RETRIEVED_TASKS", userTasks: myTasks })
             }).catch((err) => {
                 dispatch({ type: "RETRIEVE_FAILED", err })
             })
     }
 }
-//export const getTasks = ()....
-//then dispach to retrieve tasks there set the tasks property to what i retrieved
-// then in myZone place that specific tasks to be seen
