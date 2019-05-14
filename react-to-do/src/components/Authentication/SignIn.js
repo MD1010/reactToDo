@@ -13,7 +13,8 @@ class SignIn extends Component {
             {
                 email: "",
                 password: "",
-                loading: false
+                loading: false,
+                submitted: false
             }
     }
     componentDidMount() {
@@ -22,6 +23,7 @@ class SignIn extends Component {
 
     submitForm = (event) => {
         let { LogUser } = this.props
+        this.setState({submitted: true})
         event.preventDefault()
         let { email, password } = this.state
         if (email === "" || password === "")
@@ -38,21 +40,22 @@ class SignIn extends Component {
 
     render() {
         const { auth } = this.props
+        const { submitted } = this.state
         if (auth) {
             if (auth.uid) return <Redirect to='/MyTasks'></Redirect>
         }
         return (
             /* <div className={this.state.loading ? "spinner" : ""} /> */
             <div className="bgForm">
-                <div className="transparent-bg sign-in"></div> */}
+                <div className="transparent-bg sign-in"></div> 
                     <div className="title">Sign In</div>
                 <form className="form" onSubmit={this.submitForm}>
                     {/* <i className="material-icons icon ">email</i>   */}
-                    <input className="email field" id="email" spellCheck="false" autoComplete="off" placeholder="email" type="text" value={this.state.email} onChange={this.handleChange} maxLength="40"></input>
+                    <input className="email field" id="email" spellCheck="false" autoComplete="new-password" placeholder="email" type="text" value={this.state.email} onChange={this.handleChange} maxLength="40"></input>
                     {/* <i className="material-icons icon ">lock</i>   */}
-                    <input className="password field" spellCheck="false" autoComplete="off" placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="40"></input>
+                    <input className="password field" spellCheck="false" autoComplete="new-password" placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="40"></input>
                     <button type="submit" id="submit-button" >Sign In</button>
-                    <div className="error-label failedLogin">{this.props.authError}</div>
+                    <div className={submitted ? "error-label failedLogin": "hidden"}>{this.props.authError}</div>
                 </form>
             </div>
         )

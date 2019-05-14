@@ -7,7 +7,10 @@ nav{
 }
 a:not(.btn-floating):hover{
 color:rgb(233, 30, 99); 
-background: #070931;  
+background: #070931; 
+width: 100%;
+text-align: center;
+
 }
 
 @media only screen and (max-width: 450px) {
@@ -17,4 +20,5 @@ background: #070931;
   }
 nav ul a{
     margin-right: 20px !important;
+    text-align: center;
 }

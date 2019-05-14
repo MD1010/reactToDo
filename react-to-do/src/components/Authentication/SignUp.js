@@ -22,6 +22,7 @@ class SignUp extends Component {
     }
 
     submitForm = (event) => {
+        this.setState({ submitted: true})
         let { SignUp, auth } = this.props
         event.preventDefault()
         let newUserData = { firstName: "", lastName: "", password: "", email: "" }
@@ -40,7 +41,7 @@ class SignUp extends Component {
                 password: "",
                 email: "",
                 retypedPassword: "",
-                tasks: []
+                submitted: false
             })
         }
     }
@@ -51,10 +52,12 @@ class SignUp extends Component {
     }
     render() {
         let { auth } = this.props
+        let { submitted } = this.state
         if (auth.uid) {
             return <Redirect to='/MyTasks'></Redirect>
         }
         let { errors } = this.props
+
         return (
             <div className="bgForm">
                 {/* <div className="transparent-bg sign-up"></div> */}
@@ -71,16 +74,16 @@ class SignUp extends Component {
                     {/* <label className="error-label">{formErrors.lastName}</label> */}
 
                     {/* <i className="material-icons icon ">email</i>  */}
-                    <input spellCheck="false" autoComplete="off" className="input-bar field" placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange} maxLength="40"></input>
+                    <input spellCheck="false" autoComplete="new-password" className="input-bar field" placeholder="email" type="text" id="email" value={this.state.email} onChange={this.handleChange} maxLength="40"></input>
                     {/* <label className="error-label">{formErrors.email}</label> */}
                     {/* <i className="material-icons icon ">lock</i>  */}
-                    <input spellCheck="false" autoComplete="off" className="input-bar field" placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
+                    <input spellCheck="false" autoComplete="new-password" className="input-bar field" placeholder="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} maxLength="13"></input>
                     {/* <label className="error-label">{formErrors.password}</label> */}
                     {/* <i className="material-icons icon ">keyboard</i>  */}
                     <input spellCheck="false" autoComplete="off" className="input-bar field" placeholder="retype password" type="password" id="retypedPassword" value={this.state.retypedPassword} onChange={this.handleChange} maxLength="13"></input>
                     {/* <label className="error-label">{formErrors.retypedPassword}</label> */}
                     <button type="submit" id="submit-button" >Create Account</button>
-                    <label className="error-label">{errors}</label>
+                    <label className={submitted ? "error-label" : "hidden"}>{errors}</label>
                 </form>
             </div>
         )
@@ -89,7 +92,7 @@ class SignUp extends Component {
 
 const mapDispachToProps = (dispach) => {
     return {
-        SignUp: (newUser) => { dispach(SignUpNewUser(newUser)) }
+        SignUp: (newUser) => { dispach(SignUpNewUser(newUser)) },
     }
 }
 

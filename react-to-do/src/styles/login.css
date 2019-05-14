@@ -85,6 +85,9 @@ body{
     align-self: center;
 }
 
+.hidden {
+ visibility: hidden;
+}
 .failedLogin{
     margin-top: 15px;
 }
