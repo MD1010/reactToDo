@@ -15,8 +15,8 @@ class MyZone extends Component {
     const { tasks, auth } = this.props
     if (auth) {
       if (!auth.uid) return <Redirect to='/SignIn'></Redirect>
-      // let { retrieveTasks, profile } = this.props
-      // retrieveTasks(profile)
+      // let { retrieveTasks, profile } = this.propss
+      if(auth.uid) this.props.retrieveTasks()
     }
     return (
       <React.Fragment>
@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
   if (state.firestore.ordered.tasks) {
     return {
       //check how to get the tasks of specific user not all the tasks
-      tasks: state.firestore.ordered.tasks,
+      tasks: state.task.tasks,
       auth: state.firebase.auth,
       profile: state.firebase.profile,
     }
@@ -53,11 +53,11 @@ const mapStateToProps = (state) => {
 
 const mapDispachToProps = (dispach) => {
   return {
-    retrieveTasks: (profile) => { dispach(getMyTasks(profile)) }
+    retrieveTasks: () => { dispach(getMyTasks()) }
   }
 }
 export default compose(
-  connect(mapStateToProps,mapDispachToProps),
+  connect(mapStateToProps, mapDispachToProps),
   firestoreConnect([
     { collection: 'tasks' }
   ])
