@@ -11,10 +11,8 @@ class CreateTask extends Component {
         super(props)
         this.state =
             {
-                ownerFirstName: "",
-                ownerLastName: "",
+                ownerID:"",
                 content: "",
-                date: ""
             }
     }
     componentDidMount() {
@@ -42,13 +40,12 @@ class CreateTask extends Component {
             heightAuto: false,
 
         }).then((result) => {
-            let { profile } = this.props
+            let { auth } = this.props
             if (result.value) {
                 this.setState({
-                    ownerFirstName: profile.firstName,
-                    ownerLastName: profile.lastName,
+                    ownerID: auth.uid,
                     content: result.value,
-                    date: new Date().toDateString()
+                    
                 })
                 this.props.createTask(this.state)
                 makeConfirmationSwal(result)
@@ -74,7 +71,7 @@ const mapDispachToProps = (dispach) => {
 const mapStateToProps = (state) => {
     return {
         tasks: state.firestore.ordered.tasks,
-        profile: state.firebase.profile
+        auth:state.firebase.auth
     }
 }
 

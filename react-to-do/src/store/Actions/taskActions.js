@@ -50,18 +50,16 @@ export const getMyTasks = () => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         let myTasksIDS = []
         let myTasks = []
-        const loggedInFirstName = getState().firebase.profile.firstName
-        const loggedInLastName = getState().firebase.profile.lastName
+        const loggerUserID = getState().firebase.auth.uid
         const allTasks = getState().firestore.ordered.tasks
         const firestore = getFirestore()
-        console.log("in getTasks !",loggedInFirstName)
-        if (loggedInFirstName && loggedInLastName) {
-            firestore.collection('tasks').where("ownerFirstName", "==", loggedInFirstName)
-                .where("ownerLastName", "==", loggedInLastName)
+        if (loggerUserID) {
+            firestore.collection('tasks').where("ownerID", "==", loggerUserID)
                 .get().then((documents) => {
                     documents.docs.forEach(doc => {
                         myTasksIDS.push(doc.id)
                     });
+                    //get the actual tasks with the specific ids
                 }).then(() => {
                     myTasksIDS.forEach((taskID) => {
                         allTasks.forEach((task) => {

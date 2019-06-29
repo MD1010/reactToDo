@@ -12,15 +12,15 @@ import '../styles/myZone.css'
 class MyZone extends Component {
 
   render() {
-    const { tasks, auth } = this.props
+    const { tasks, auth, retrieved } = this.props
     if (auth) {
       if (!auth.uid) return <Redirect to='/SignIn'></Redirect>
       // let { retrieveTasks, profile } = this.propss
-      if(auth.uid) this.props.retrieveTasks()
+      if(auth.uid ) this.props.retrieveTasks()
     }
     return (
       <React.Fragment>
-        <div className={tasks == null ? "spinner" : ""}></div>
+        <div className={tasks == null || retrieved === false ? "spinner" : ""}></div>
         <div className="TaskZone">
           {/* <div className="background" /> */}
           <div className="MyTasks" >
@@ -41,6 +41,7 @@ const mapStateToProps = (state) => {
       //check how to get the tasks of specific user not all the tasks
       tasks: state.task.tasks,
       auth: state.firebase.auth,
+      retrieved: state.task.retrieved,
       profile: state.firebase.profile,
     }
   }
