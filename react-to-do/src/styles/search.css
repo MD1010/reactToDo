@@ -1,4 +1,4 @@
-.material-icons:hover{
+.material-icons:hover:not('.searchIcon'){
     cursor: pointer;
 }
 
@@ -21,3 +21,7 @@
 .searchIcon{
     left: 8px !important;
 }
+.searchIcon::selection 
+{
+    background-color:transparent;
+} 

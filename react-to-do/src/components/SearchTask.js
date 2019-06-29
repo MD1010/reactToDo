@@ -1,22 +1,51 @@
-import React, { Component } from 'react'
-import '../styles/search.css'
-import swal from 'sweetalert';
+import React, { Component } from "react";
+import "../styles/search.css";
+import { connect } from "react-redux";
+import { FilterTasks } from "../store/Actions/taskActions";
 
 class SearchTask extends Component {
+  
 
-    searchTask = () => {
-        swal("need to write search function")
-    }
+  handleSearch = event => {
+    this.props.Filter(event.target.value);
+  };
 
-    render() {
-        return (
-            <form className="searchForm left">
-                <div className="input-field">
-                    <i onClick={this.searchTask} className="material-icons prefix white-text searchIcon">search</i>
-                    <input className="materialize-textarea searchBox" placeholder="search a task..."></input>
-                </div>
-            </form>
-        )
-    }
+  render() {
+    return (
+      <form className="searchForm left">
+        <div className="input-field">
+          <i className="material-icons prefix white-text searchIcon">search</i>
+          <input
+            className="materialize-textarea searchBox"
+            placeholder="search a task..."
+            onChange={this.handleSearch}
+          />
+        </div>
+      </form>
+    );
+  }
 }
-export default SearchTask
+
+const mapStateToProps = state => {
+  console.log(state);
+  if (state.firestore.ordered.tasks) {
+    return {
+      tasks: state.task.tasks
+    };
+  } else
+    return {
+      tasks: null
+    };
+};
+
+const mapDispachToProps = dispach => {
+  return {
+    Filter: (input) => {
+      dispach(FilterTasks(input));
+    }
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispachToProps
+)(SearchTask);
