@@ -1,3 +1,5 @@
+import { stat } from "fs";
+
 const initState = {
     authError: null,
 }
@@ -36,6 +38,11 @@ const authReducer = (state = initState, action) => {
             return {
                 ...state,
                 authError: null
+            }
+        case 'WRONG_RETYPE':
+            return{
+                ...state,
+                authError: "passwords don't match"
             }
         default:
             return state

@@ -13,11 +13,6 @@ text-align: center;
 
 }
 
-@media only screen and (max-width: 450px) {
-    nav{
-        width: max-content;
-    }
-  }
 nav ul a{
     margin-right: 20px !important;
     text-align: center;

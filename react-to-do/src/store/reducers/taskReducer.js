@@ -4,9 +4,6 @@ const initState = {
   filteredTasks: []
 };
 
-// this reducer is useless since it's aim is to add
-//properties to the store that can be accesed by other components
-// and it doesnt add anything since the operations to the tasks are made by firebase
 const taskReducer = (state = initState, action) => {
   switch (action.type) {
     case "ADD_TODO":
@@ -25,7 +22,6 @@ const taskReducer = (state = initState, action) => {
       };
   case "RETRIEVE_STATUS":
     return{
-      
       retrieved:false
     }
     case "RETRIEVE_FAILED":

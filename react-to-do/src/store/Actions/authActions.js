@@ -53,9 +53,17 @@ export const SignUpNewUser = newUser => {
 
       .then(() => {
         dispatch({ type: "SIGNUP_SUCCESS" });
+      }).then(()=>{
+        dispatch({type: "RETRIEVE_STATUS"})
       })
       .catch(err => {
         dispatch({ type: "SIGNUP_ERROR", err });
       });
+  };
+};
+
+export const WrongRetype = () => {
+  return dispach => {
+    dispach({ type: "WRONG_RETYPE" });
   };
 };
